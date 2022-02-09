@@ -4,6 +4,8 @@
 <dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>This application will use Bluetooth to connect to the Arduino device to test.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This application will use Bluetooth to connect to the Arduino device to test.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
