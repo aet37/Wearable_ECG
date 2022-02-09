@@ -1,14 +1,14 @@
 //
-//  ECG_ReaderTests.swift
-//  ECG ReaderTests
+//  WearableECGTests.swift
+//  WearableECGTests
 //
-//  Created by Andrew Toader on 02.02.22 .
+//  Created by Andrew Toader on 09.02.22 .
 //
 
 import XCTest
-@testable import ECG_Reader
+@testable import WearableECG
 
-class ECG_ReaderTests: XCTestCase {
+class WearableECGTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
