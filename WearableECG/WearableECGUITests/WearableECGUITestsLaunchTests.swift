@@ -1,13 +1,13 @@
 //
-//  ECG_ReaderUITestsLaunchTests.swift
-//  ECG ReaderUITests
+//  WearableECGUITestsLaunchTests.swift
+//  WearableECGUITests
 //
-//  Created by Andrew Toader on 02.02.22 .
+//  Created by Andrew Toader on 09.02.22 .
 //
 
 import XCTest
 
-class ECG_ReaderUITestsLaunchTests: XCTestCase {
+class WearableECGUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

@@ -7,65 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49487E3227AB131500DE9B45 /* ECG_ReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487E3127AB131500DE9B45 /* ECG_ReaderApp.swift */; };
-		49487E3427AB131500DE9B45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487E3327AB131500DE9B45 /* ContentView.swift */; };
-		49487E3627AB131600DE9B45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49487E3527AB131600DE9B45 /* Assets.xcassets */; };
-		49487E3927AB131600DE9B45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49487E3827AB131600DE9B45 /* Preview Assets.xcassets */; };
-		49487E3B27AB131600DE9B45 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487E3A27AB131600DE9B45 /* Persistence.swift */; };
-		49487E3E27AB131600DE9B45 /* ECG_Reader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49487E3C27AB131600DE9B45 /* ECG_Reader.xcdatamodeld */; };
-		49487E4827AB131700DE9B45 /* ECG_ReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487E4727AB131700DE9B45 /* ECG_ReaderTests.swift */; };
-		49487E5227AB131700DE9B45 /* ECG_ReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487E5127AB131700DE9B45 /* ECG_ReaderUITests.swift */; };
-		49487E5427AB131700DE9B45 /* ECG_ReaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49487E5327AB131700DE9B45 /* ECG_ReaderUITestsLaunchTests.swift */; };
+		49CE3ED927B44E6700E5A6A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CE3ED827B44E6700E5A6A7 /* AppDelegate.swift */; };
+		49CE3EDB27B44E6700E5A6A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CE3EDA27B44E6700E5A6A7 /* SceneDelegate.swift */; };
+		49CE3EDD27B44E6700E5A6A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CE3EDC27B44E6700E5A6A7 /* ViewController.swift */; };
+		49CE3EE027B44E6700E5A6A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49CE3EDE27B44E6700E5A6A7 /* Main.storyboard */; };
+		49CE3EE227B44E6800E5A6A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49CE3EE127B44E6800E5A6A7 /* Assets.xcassets */; };
+		49CE3EE527B44E6800E5A6A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49CE3EE327B44E6800E5A6A7 /* LaunchScreen.storyboard */; };
+		49CE3EF027B44E6800E5A6A7 /* WearableECGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CE3EEF27B44E6800E5A6A7 /* WearableECGTests.swift */; };
+		49CE3EFA27B44E6800E5A6A7 /* WearableECGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CE3EF927B44E6800E5A6A7 /* WearableECGUITests.swift */; };
+		49CE3EFC27B44E6800E5A6A7 /* WearableECGUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CE3EFB27B44E6800E5A6A7 /* WearableECGUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		49487E4427AB131700DE9B45 /* PBXContainerItemProxy */ = {
+		49CE3EEC27B44E6800E5A6A7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 49487E2627AB131500DE9B45 /* Project object */;
+			containerPortal = 49CE3ECD27B44E6700E5A6A7 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 49487E2D27AB131500DE9B45;
-			remoteInfo = "ECG Reader";
+			remoteGlobalIDString = 49CE3ED427B44E6700E5A6A7;
+			remoteInfo = WearableECG;
 		};
-		49487E4E27AB131700DE9B45 /* PBXContainerItemProxy */ = {
+		49CE3EF627B44E6800E5A6A7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 49487E2627AB131500DE9B45 /* Project object */;
+			containerPortal = 49CE3ECD27B44E6700E5A6A7 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 49487E2D27AB131500DE9B45;
-			remoteInfo = "ECG Reader";
+			remoteGlobalIDString = 49CE3ED427B44E6700E5A6A7;
+			remoteInfo = WearableECG;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		49487E2E27AB131500DE9B45 /* ECG Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECG Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		49487E3127AB131500DE9B45 /* ECG_ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ReaderApp.swift; sourceTree = "<group>"; };
-		49487E3327AB131500DE9B45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		49487E3527AB131600DE9B45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		49487E3827AB131600DE9B45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		49487E3A27AB131600DE9B45 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		49487E3D27AB131600DE9B45 /* ECG_Reader.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ECG_Reader.xcdatamodel; sourceTree = "<group>"; };
-		49487E4327AB131700DE9B45 /* ECG ReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ECG ReaderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		49487E4727AB131700DE9B45 /* ECG_ReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ReaderTests.swift; sourceTree = "<group>"; };
-		49487E4D27AB131700DE9B45 /* ECG ReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ECG ReaderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		49487E5127AB131700DE9B45 /* ECG_ReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ReaderUITests.swift; sourceTree = "<group>"; };
-		49487E5327AB131700DE9B45 /* ECG_ReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECG_ReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		49CE3ED527B44E6700E5A6A7 /* WearableECG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WearableECG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49CE3ED827B44E6700E5A6A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49CE3EDA27B44E6700E5A6A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		49CE3EDC27B44E6700E5A6A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49CE3EDF27B44E6700E5A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49CE3EE127B44E6800E5A6A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49CE3EE427B44E6800E5A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		49CE3EE627B44E6800E5A6A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49CE3EEB27B44E6800E5A6A7 /* WearableECGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WearableECGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49CE3EEF27B44E6800E5A6A7 /* WearableECGTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WearableECGTests.swift; sourceTree = "<group>"; };
+		49CE3EF527B44E6800E5A6A7 /* WearableECGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WearableECGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49CE3EF927B44E6800E5A6A7 /* WearableECGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WearableECGUITests.swift; sourceTree = "<group>"; };
+		49CE3EFB27B44E6800E5A6A7 /* WearableECGUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WearableECGUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		49487E2B27AB131500DE9B45 /* Frameworks */ = {
+		49CE3ED227B44E6700E5A6A7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49487E4027AB131700DE9B45 /* Frameworks */ = {
+		49CE3EE827B44E6800E5A6A7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49487E4A27AB131700DE9B45 /* Frameworks */ = {
+		49CE3EF227B44E6800E5A6A7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -75,144 +76,137 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		49487E2527AB131500DE9B45 = {
+		49CE3ECC27B44E6700E5A6A7 = {
 			isa = PBXGroup;
 			children = (
-				49487E3027AB131500DE9B45 /* ECG Reader */,
-				49487E4627AB131700DE9B45 /* ECG ReaderTests */,
-				49487E5027AB131700DE9B45 /* ECG ReaderUITests */,
-				49487E2F27AB131500DE9B45 /* Products */,
+				49CE3ED727B44E6700E5A6A7 /* WearableECG */,
+				49CE3EEE27B44E6800E5A6A7 /* WearableECGTests */,
+				49CE3EF827B44E6800E5A6A7 /* WearableECGUITests */,
+				49CE3ED627B44E6700E5A6A7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		49487E2F27AB131500DE9B45 /* Products */ = {
+		49CE3ED627B44E6700E5A6A7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				49487E2E27AB131500DE9B45 /* ECG Reader.app */,
-				49487E4327AB131700DE9B45 /* ECG ReaderTests.xctest */,
-				49487E4D27AB131700DE9B45 /* ECG ReaderUITests.xctest */,
+				49CE3ED527B44E6700E5A6A7 /* WearableECG.app */,
+				49CE3EEB27B44E6800E5A6A7 /* WearableECGTests.xctest */,
+				49CE3EF527B44E6800E5A6A7 /* WearableECGUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		49487E3027AB131500DE9B45 /* ECG Reader */ = {
+		49CE3ED727B44E6700E5A6A7 /* WearableECG */ = {
 			isa = PBXGroup;
 			children = (
-				49487E3127AB131500DE9B45 /* ECG_ReaderApp.swift */,
-				49487E3327AB131500DE9B45 /* ContentView.swift */,
-				49487E3527AB131600DE9B45 /* Assets.xcassets */,
-				49487E3A27AB131600DE9B45 /* Persistence.swift */,
-				49487E3C27AB131600DE9B45 /* ECG_Reader.xcdatamodeld */,
-				49487E3727AB131600DE9B45 /* Preview Content */,
+				49CE3ED827B44E6700E5A6A7 /* AppDelegate.swift */,
+				49CE3EDA27B44E6700E5A6A7 /* SceneDelegate.swift */,
+				49CE3EDC27B44E6700E5A6A7 /* ViewController.swift */,
+				49CE3EDE27B44E6700E5A6A7 /* Main.storyboard */,
+				49CE3EE127B44E6800E5A6A7 /* Assets.xcassets */,
+				49CE3EE327B44E6800E5A6A7 /* LaunchScreen.storyboard */,
+				49CE3EE627B44E6800E5A6A7 /* Info.plist */,
 			);
-			path = "ECG Reader";
+			path = WearableECG;
 			sourceTree = "<group>";
 		};
-		49487E3727AB131600DE9B45 /* Preview Content */ = {
+		49CE3EEE27B44E6800E5A6A7 /* WearableECGTests */ = {
 			isa = PBXGroup;
 			children = (
-				49487E3827AB131600DE9B45 /* Preview Assets.xcassets */,
+				49CE3EEF27B44E6800E5A6A7 /* WearableECGTests.swift */,
 			);
-			path = "Preview Content";
+			path = WearableECGTests;
 			sourceTree = "<group>";
 		};
-		49487E4627AB131700DE9B45 /* ECG ReaderTests */ = {
+		49CE3EF827B44E6800E5A6A7 /* WearableECGUITests */ = {
 			isa = PBXGroup;
 			children = (
-				49487E4727AB131700DE9B45 /* ECG_ReaderTests.swift */,
+				49CE3EF927B44E6800E5A6A7 /* WearableECGUITests.swift */,
+				49CE3EFB27B44E6800E5A6A7 /* WearableECGUITestsLaunchTests.swift */,
 			);
-			path = "ECG ReaderTests";
-			sourceTree = "<group>";
-		};
-		49487E5027AB131700DE9B45 /* ECG ReaderUITests */ = {
-			isa = PBXGroup;
-			children = (
-				49487E5127AB131700DE9B45 /* ECG_ReaderUITests.swift */,
-				49487E5327AB131700DE9B45 /* ECG_ReaderUITestsLaunchTests.swift */,
-			);
-			path = "ECG ReaderUITests";
+			path = WearableECGUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		49487E2D27AB131500DE9B45 /* ECG Reader */ = {
+		49CE3ED427B44E6700E5A6A7 /* WearableECG */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 49487E5727AB131700DE9B45 /* Build configuration list for PBXNativeTarget "ECG Reader" */;
+			buildConfigurationList = 49CE3EFF27B44E6800E5A6A7 /* Build configuration list for PBXNativeTarget "WearableECG" */;
 			buildPhases = (
-				49487E2A27AB131500DE9B45 /* Sources */,
-				49487E2B27AB131500DE9B45 /* Frameworks */,
-				49487E2C27AB131500DE9B45 /* Resources */,
+				49CE3ED127B44E6700E5A6A7 /* Sources */,
+				49CE3ED227B44E6700E5A6A7 /* Frameworks */,
+				49CE3ED327B44E6700E5A6A7 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "ECG Reader";
-			productName = "ECG Reader";
-			productReference = 49487E2E27AB131500DE9B45 /* ECG Reader.app */;
+			name = WearableECG;
+			productName = WearableECG;
+			productReference = 49CE3ED527B44E6700E5A6A7 /* WearableECG.app */;
 			productType = "com.apple.product-type.application";
 		};
-		49487E4227AB131700DE9B45 /* ECG ReaderTests */ = {
+		49CE3EEA27B44E6800E5A6A7 /* WearableECGTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 49487E5A27AB131700DE9B45 /* Build configuration list for PBXNativeTarget "ECG ReaderTests" */;
+			buildConfigurationList = 49CE3F0227B44E6800E5A6A7 /* Build configuration list for PBXNativeTarget "WearableECGTests" */;
 			buildPhases = (
-				49487E3F27AB131700DE9B45 /* Sources */,
-				49487E4027AB131700DE9B45 /* Frameworks */,
-				49487E4127AB131700DE9B45 /* Resources */,
+				49CE3EE727B44E6800E5A6A7 /* Sources */,
+				49CE3EE827B44E6800E5A6A7 /* Frameworks */,
+				49CE3EE927B44E6800E5A6A7 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				49487E4527AB131700DE9B45 /* PBXTargetDependency */,
+				49CE3EED27B44E6800E5A6A7 /* PBXTargetDependency */,
 			);
-			name = "ECG ReaderTests";
-			productName = "ECG ReaderTests";
-			productReference = 49487E4327AB131700DE9B45 /* ECG ReaderTests.xctest */;
+			name = WearableECGTests;
+			productName = WearableECGTests;
+			productReference = 49CE3EEB27B44E6800E5A6A7 /* WearableECGTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		49487E4C27AB131700DE9B45 /* ECG ReaderUITests */ = {
+		49CE3EF427B44E6800E5A6A7 /* WearableECGUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 49487E5D27AB131700DE9B45 /* Build configuration list for PBXNativeTarget "ECG ReaderUITests" */;
+			buildConfigurationList = 49CE3F0527B44E6800E5A6A7 /* Build configuration list for PBXNativeTarget "WearableECGUITests" */;
 			buildPhases = (
-				49487E4927AB131700DE9B45 /* Sources */,
-				49487E4A27AB131700DE9B45 /* Frameworks */,
-				49487E4B27AB131700DE9B45 /* Resources */,
+				49CE3EF127B44E6800E5A6A7 /* Sources */,
+				49CE3EF227B44E6800E5A6A7 /* Frameworks */,
+				49CE3EF327B44E6800E5A6A7 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				49487E4F27AB131700DE9B45 /* PBXTargetDependency */,
+				49CE3EF727B44E6800E5A6A7 /* PBXTargetDependency */,
 			);
-			name = "ECG ReaderUITests";
-			productName = "ECG ReaderUITests";
-			productReference = 49487E4D27AB131700DE9B45 /* ECG ReaderUITests.xctest */;
+			name = WearableECGUITests;
+			productName = WearableECGUITests;
+			productReference = 49CE3EF527B44E6800E5A6A7 /* WearableECGUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		49487E2627AB131500DE9B45 /* Project object */ = {
+		49CE3ECD27B44E6700E5A6A7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
-					49487E2D27AB131500DE9B45 = {
+					49CE3ED427B44E6700E5A6A7 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
-					49487E4227AB131700DE9B45 = {
+					49CE3EEA27B44E6800E5A6A7 = {
 						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 49487E2D27AB131500DE9B45;
+						TestTargetID = 49CE3ED427B44E6700E5A6A7;
 					};
-					49487E4C27AB131700DE9B45 = {
+					49CE3EF427B44E6800E5A6A7 = {
 						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 49487E2D27AB131500DE9B45;
+						TestTargetID = 49CE3ED427B44E6700E5A6A7;
 					};
 				};
 			};
-			buildConfigurationList = 49487E2927AB131500DE9B45 /* Build configuration list for PBXProject "ECG Reader" */;
+			buildConfigurationList = 49CE3ED027B44E6700E5A6A7 /* Build configuration list for PBXProject "WearableECG" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -220,36 +214,37 @@
 				en,
 				Base,
 			);
-			mainGroup = 49487E2527AB131500DE9B45;
-			productRefGroup = 49487E2F27AB131500DE9B45 /* Products */;
+			mainGroup = 49CE3ECC27B44E6700E5A6A7;
+			productRefGroup = 49CE3ED627B44E6700E5A6A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				49487E2D27AB131500DE9B45 /* ECG Reader */,
-				49487E4227AB131700DE9B45 /* ECG ReaderTests */,
-				49487E4C27AB131700DE9B45 /* ECG ReaderUITests */,
+				49CE3ED427B44E6700E5A6A7 /* WearableECG */,
+				49CE3EEA27B44E6800E5A6A7 /* WearableECGTests */,
+				49CE3EF427B44E6800E5A6A7 /* WearableECGUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		49487E2C27AB131500DE9B45 /* Resources */ = {
+		49CE3ED327B44E6700E5A6A7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49487E3927AB131600DE9B45 /* Preview Assets.xcassets in Resources */,
-				49487E3627AB131600DE9B45 /* Assets.xcassets in Resources */,
+				49CE3EE527B44E6800E5A6A7 /* LaunchScreen.storyboard in Resources */,
+				49CE3EE227B44E6800E5A6A7 /* Assets.xcassets in Resources */,
+				49CE3EE027B44E6700E5A6A7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49487E4127AB131700DE9B45 /* Resources */ = {
+		49CE3EE927B44E6800E5A6A7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49487E4B27AB131700DE9B45 /* Resources */ = {
+		49CE3EF327B44E6800E5A6A7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -259,51 +254,69 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		49487E2A27AB131500DE9B45 /* Sources */ = {
+		49CE3ED127B44E6700E5A6A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49487E3E27AB131600DE9B45 /* ECG_Reader.xcdatamodeld in Sources */,
-				49487E3B27AB131600DE9B45 /* Persistence.swift in Sources */,
-				49487E3427AB131500DE9B45 /* ContentView.swift in Sources */,
-				49487E3227AB131500DE9B45 /* ECG_ReaderApp.swift in Sources */,
+				49CE3EDD27B44E6700E5A6A7 /* ViewController.swift in Sources */,
+				49CE3ED927B44E6700E5A6A7 /* AppDelegate.swift in Sources */,
+				49CE3EDB27B44E6700E5A6A7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49487E3F27AB131700DE9B45 /* Sources */ = {
+		49CE3EE727B44E6800E5A6A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49487E4827AB131700DE9B45 /* ECG_ReaderTests.swift in Sources */,
+				49CE3EF027B44E6800E5A6A7 /* WearableECGTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49487E4927AB131700DE9B45 /* Sources */ = {
+		49CE3EF127B44E6800E5A6A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49487E5227AB131700DE9B45 /* ECG_ReaderUITests.swift in Sources */,
-				49487E5427AB131700DE9B45 /* ECG_ReaderUITestsLaunchTests.swift in Sources */,
+				49CE3EFA27B44E6800E5A6A7 /* WearableECGUITests.swift in Sources */,
+				49CE3EFC27B44E6800E5A6A7 /* WearableECGUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		49487E4527AB131700DE9B45 /* PBXTargetDependency */ = {
+		49CE3EED27B44E6800E5A6A7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 49487E2D27AB131500DE9B45 /* ECG Reader */;
-			targetProxy = 49487E4427AB131700DE9B45 /* PBXContainerItemProxy */;
+			target = 49CE3ED427B44E6700E5A6A7 /* WearableECG */;
+			targetProxy = 49CE3EEC27B44E6800E5A6A7 /* PBXContainerItemProxy */;
 		};
-		49487E4F27AB131700DE9B45 /* PBXTargetDependency */ = {
+		49CE3EF727B44E6800E5A6A7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 49487E2D27AB131500DE9B45 /* ECG Reader */;
-			targetProxy = 49487E4E27AB131700DE9B45 /* PBXContainerItemProxy */;
+			target = 49CE3ED427B44E6700E5A6A7 /* WearableECG */;
+			targetProxy = 49CE3EF627B44E6800E5A6A7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		49CE3EDE27B44E6700E5A6A7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49CE3EDF27B44E6700E5A6A7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49CE3EE327B44E6800E5A6A7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49CE3EE427B44E6800E5A6A7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		49487E5527AB131700DE9B45 /* Debug */ = {
+		49CE3EFD27B44E6800E5A6A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -364,7 +377,7 @@
 			};
 			name = Debug;
 		};
-		49487E5627AB131700DE9B45 /* Release */ = {
+		49CE3EFE27B44E6800E5A6A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -419,19 +432,19 @@
 			};
 			name = Release;
 		};
-		49487E5827AB131700DE9B45 /* Debug */ = {
+		49CE3F0027B44E6800E5A6A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ECG Reader/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = WearableECG/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -439,7 +452,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecgtech.ECG-Reader";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecgtech.WearableECG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -447,19 +460,19 @@
 			};
 			name = Debug;
 		};
-		49487E5927AB131700DE9B45 /* Release */ = {
+		49CE3F0127B44E6800E5A6A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ECG Reader/Preview Content\"";
-				ENABLE_PREVIEWS = YES;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = WearableECG/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -467,7 +480,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecgtech.ECG-Reader";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecgtech.WearableECG;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -475,131 +488,122 @@
 			};
 			name = Release;
 		};
-		49487E5B27AB131700DE9B45 /* Debug */ = {
+		49CE3F0327B44E6800E5A6A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecgtech.ECG-ReaderTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecgtech.WearableECGTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ECG Reader.app/ECG Reader";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WearableECG.app/WearableECG";
 			};
 			name = Debug;
 		};
-		49487E5C27AB131700DE9B45 /* Release */ = {
+		49CE3F0427B44E6800E5A6A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecgtech.ECG-ReaderTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecgtech.WearableECGTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ECG Reader.app/ECG Reader";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WearableECG.app/WearableECG";
 			};
 			name = Release;
 		};
-		49487E5E27AB131700DE9B45 /* Debug */ = {
+		49CE3F0627B44E6800E5A6A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecgtech.ECG-ReaderUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecgtech.WearableECGUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "ECG Reader";
+				TEST_TARGET_NAME = WearableECG;
 			};
 			name = Debug;
 		};
-		49487E5F27AB131700DE9B45 /* Release */ = {
+		49CE3F0727B44E6800E5A6A7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ecgtech.ECG-ReaderUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecgtech.WearableECGUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "ECG Reader";
+				TEST_TARGET_NAME = WearableECG;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		49487E2927AB131500DE9B45 /* Build configuration list for PBXProject "ECG Reader" */ = {
+		49CE3ED027B44E6700E5A6A7 /* Build configuration list for PBXProject "WearableECG" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				49487E5527AB131700DE9B45 /* Debug */,
-				49487E5627AB131700DE9B45 /* Release */,
+				49CE3EFD27B44E6800E5A6A7 /* Debug */,
+				49CE3EFE27B44E6800E5A6A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		49487E5727AB131700DE9B45 /* Build configuration list for PBXNativeTarget "ECG Reader" */ = {
+		49CE3EFF27B44E6800E5A6A7 /* Build configuration list for PBXNativeTarget "WearableECG" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				49487E5827AB131700DE9B45 /* Debug */,
-				49487E5927AB131700DE9B45 /* Release */,
+				49CE3F0027B44E6800E5A6A7 /* Debug */,
+				49CE3F0127B44E6800E5A6A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		49487E5A27AB131700DE9B45 /* Build configuration list for PBXNativeTarget "ECG ReaderTests" */ = {
+		49CE3F0227B44E6800E5A6A7 /* Build configuration list for PBXNativeTarget "WearableECGTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				49487E5B27AB131700DE9B45 /* Debug */,
-				49487E5C27AB131700DE9B45 /* Release */,
+				49CE3F0327B44E6800E5A6A7 /* Debug */,
+				49CE3F0427B44E6800E5A6A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		49487E5D27AB131700DE9B45 /* Build configuration list for PBXNativeTarget "ECG ReaderUITests" */ = {
+		49CE3F0527B44E6800E5A6A7 /* Build configuration list for PBXNativeTarget "WearableECGUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				49487E5E27AB131700DE9B45 /* Debug */,
-				49487E5F27AB131700DE9B45 /* Release */,
+				49CE3F0627B44E6800E5A6A7 /* Debug */,
+				49CE3F0727B44E6800E5A6A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		49487E3C27AB131600DE9B45 /* ECG_Reader.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				49487E3D27AB131600DE9B45 /* ECG_Reader.xcdatamodel */,
-			);
-			currentVersion = 49487E3D27AB131600DE9B45 /* ECG_Reader.xcdatamodel */;
-			path = ECG_Reader.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = 49487E2627AB131500DE9B45 /* Project object */;
+	rootObject = 49CE3ECD27B44E6700E5A6A7 /* Project object */;
 }
