@@ -2,30 +2,23 @@
 //  ViewController.swift
 //  ECGv1
 //
-//  Created by Bobby Rouse on 2/14/22.
+//  Created by Bobby Rouse on 2/22/22.
+//  Currently simulating for iphone 12 pro
 //
+//
+// TOADER/LUCIO: lines 87-92 is where you should connect the data coming in to be displayed
+// you can change the graphs refresh rate on line 51, it's currently set for 250hz
 
 import UIKit
+import Charts
 
 class ViewController: UIViewController {
+
+    /*-------------------------------Graph-------------------------------*/
+    @IBOutlet weak var lineChartView: LineChartView!
     
-    private let imageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .gray
-        
-       return imageView
-    }()
     
-    //start button
-    public let button1: UIButton = {
-       let button1 = UIButton()
-        button1.backgroundColor = .gray
-        button1.setTitle("Start Reading", for: .normal)
-        button1.setTitleColor(.black, for: .normal)
-       return button1
-    }()
-    
+    /*-------------------------------Buttons-------------------------------*/
     //heart rate value
     public let button2: UIButton = {
        let button2 = UIButton()
@@ -44,62 +37,23 @@ class ViewController: UIViewController {
        return button3
     }()
     
-    //global vars for heartbeat sim
-    var testindex: Int = 0
-    var timer: Timer?
-    var photoindex: Int = 0
     
-    
+    /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = .systemGray
-        view.addSubview(imageView)
-        imageView.frame = CGRect(x: (view.frame.size.width-300)/2, y: 300, width: 300, height: 300)
-        //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        //imageView.center = view.center
         
-        
-        view.addSubview(button1)
         view.addSubview(button2)
         view.addSubview(button3)
         
-        getPhoto()
+        setChartValues()
         
-        button1.addTarget(self, action: #selector(didTapButton1), for: .touchUpInside)
-    }
-  
-    
-    @objc func refresh(){
-        if( testindex > 20){
-            timer?.invalidate()
-        }
-        //photo gen
-        getPhoto()
-        
-        //random/realistic heartbeat
-        var n = Int.random(in: 70...90)
-        button2.setTitle(String(n), for: .normal)
-        
-        //index for timer stoppage
-        testindex = testindex+1
-    }
-   
-    @objc func didTapButton1() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-            self.refresh()
-        })
-        
-        //getPhoto()
+        //currently set for 250 hz, timeInterval is in ms
+        _ = Timer.scheduledTimer(timeInterval: 0.04, target:self, selector: #selector(self.setChartValues), userInfo: nil, repeats: true)
     }
     
+    /*-------------------------------Button Layout-------------------------------*/
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        button1.frame = CGRect(
-            x: 30,
-            y: view.frame.size.height-150-view.safeAreaInsets.bottom,
-            width: view.frame.size.width-60,
-            height: 55
-        )
         button2.frame = CGRect(
             x: 57,
             y: 225,
@@ -115,42 +69,38 @@ class ViewController: UIViewController {
         
     }
     
-    func getPhoto(){
-       /* let urlString = "https://source.unsplash.com/random/600x600"
+    
+    /*-------------------------------Chart Values-------------------------------*/
+    
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1200)
+    
+    @objc func setValues(){
         
-        let url = URL(string:urlString)!
-        guard let data = try? Data(contentsOf: url) else {
-            return
-        }*/
-        
-        if (photoindex == 0){
-            imageView.image = UIImage(named: "hb1")
-            photoindex = photoindex+1
-        }else if(photoindex==1){
-            imageView.image = UIImage(named: "hb2")
-            photoindex = photoindex+1
-        }else if(photoindex==2){
-            imageView.image = UIImage(named: "hb3")
-            photoindex = photoindex+1
-        }else if(photoindex==3){
-            imageView.image = UIImage(named: "hb4")
-            photoindex = photoindex+1
-        }else if(photoindex==4){
-            imageView.image = UIImage(named: "hb5")
-            photoindex = photoindex+1
-        }else if(photoindex==5){
-            imageView.image = UIImage(named: "hb6")
-            photoindex = photoindex+1
-        }else if(photoindex==6){
-            imageView.image = UIImage(named: "hb7")
-            photoindex = photoindex+1
-        }else if(photoindex==7){
-            imageView.image = UIImage(named: "hb8")
-            photoindex = 0
+        //This loop demonstrates functionality, comment out when you have our input connected
+        for i in 0..<1200 {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(arc4random_uniform(UInt32(20)) + 3))
         }
         
-        //imageView.image = UIImage(named: "hb1")
+        //This will add our data to the graph
+        /*
+        var newVal = /*NEWVALUE*/ //should be a number
+        let first1 = valuesArr.removeFirst()
+        valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal))
+        */
+        
     }
+    
+    @objc func setChartValues(){
+        setValues()
+        
+        let set1 = LineChartDataSet(entries: valuesArr, label: "dataset 1")
+        set1.drawCirclesEnabled = false
+        let data = LineChartData(dataSet: set1)
+        
+        self.lineChartView.data = data
+        
+    }
+
 
 }
 
