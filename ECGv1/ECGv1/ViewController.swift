@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import CoreBluetooth
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
+    
+    // Properties for Bluetooth
+    private var centralManager: CBCentralManager!
+    private var peripheral: CBPeripheral!
     
     private let imageView: UIImageView = {
        let imageView = UIImageView()
@@ -52,6 +57,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Bluetooth Central manager
+        
         //view.backgroundColor = .systemGray
         view.addSubview(imageView)
         imageView.frame = CGRect(x: (view.frame.size.width-300)/2, y: 300, width: 300, height: 300)
