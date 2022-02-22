@@ -8,18 +8,18 @@
 //
 // TOADER/LUCIO: lines 87-92 is where you should connect the data coming in to be displayed
 // you can change the graphs refresh rate on line 51, it's currently set for 250hz
+//
 
 import UIKit
 import CoreBluetooth
+import Charts
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
-    // Properties for Bluetooth
+    /*-------------------------------Bluetooth-------------------------------*/
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
-import Charts
-
-class ViewController: UIViewController {
+    private var arduCh: CBCharacteristic?
 
     /*-------------------------------Graph-------------------------------*/
     @IBOutlet weak var lineChartView: LineChartView!
@@ -37,11 +37,11 @@ class ViewController: UIViewController {
     
     //Lead Status value
     public let button3: UIButton = {
-       let button3 = UIButton()
+        let button3 = UIButton()
         button3.backgroundColor = .gray
         button3.setTitle("OK", for: .normal)
         button3.setTitleColor(.black, for: .normal)
-       return button3
+        return button3
     }()
     
     
@@ -50,6 +50,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // Bluetooth Central manager
+        centralManager = CBCentralManager(delegate: self, queue: nil)
         
         //view.backgroundColor = .systemGray
         view.addSubview(imageView)
@@ -115,7 +116,98 @@ class ViewController: UIViewController {
         self.lineChartView.data = data
         
     }
+    
+    /*-------------------------------Bluetooth-------------------------------*/
+    
+    // Start Scanning for BT devices
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        print("Central state update")
+            if central.state != .poweredOn {
+                print("Central is not powered on")
+            } else {
+                print("Central scanning for", ArduPeripheral.ArduUUID);
+                centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
+            }
+        }
 
+    // Handles the result of the scan
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
 
+        // We've found it so stop scan
+        if peripheral.identifier.uuidString == ArduPeripheral.ArduUUID_str {
+            self.centralManager.stopScan()
+            
+            // Copy the peripheral instance
+            self.peripheral = peripheral
+            self.peripheral.delegate = self
+            
+            // Connect!
+            self.centralManager.connect(self.peripheral, options: nil)
+        }
+    }
+    
+    // The handler if we do connect succesfully
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        if peripheral == self.peripheral {
+            print("Connected to Arduino")
+            peripheral.discoverServices(nil) //[ArduPeripheral.Serv1UUID]
+        }
+    }
+    
+    // Handles discovery event
+   func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+       if let services = peripheral.services {
+           for service in services {
+               if service.uuid == ArduPeripheral.Serv1UUID {
+                   print("Arduino service found")
+                   
+                   //Now kick off discovery of characteristics
+                   peripheral.discoverCharacteristics(nil, for: service)
+                   return
+               }
+           }
+       }
+   }
+
+    // Handling discovery of characteristics
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        if let characteristics = service.characteristics {
+            for characteristic in characteristics {
+                if characteristic.uuid == ArduPeripheral.Char1UUUID {
+                    print("Arduino characteristic found")
+                    arduCh = characteristic
+                    peripheral.setNotifyValue(true, for: characteristic)
+                    
+                    // Enable switch
+                    //startSwitch.isEnabled = true
+                }
+            }
+        }
+    }
+    
+    //
+    /** Handle Vaue recived from Ardu  **/
+    //
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        
+        print("Received", String(characteristic.value![0]))
+        
+        }
+
+    // Handle Disconnect
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        if peripheral == self.peripheral {
+            print("Disconnected")
+            
+            // Disable the switch
+            //startSwitch.isEnabled = false
+        }
+        
+        // Don't write to unwanted place
+        self.peripheral = nil
+        
+        // Start Scanning again
+        print("Central scanning for", ArduPeripheral.ArduUUID);
+        centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
+    }
 }
-

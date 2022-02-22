@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3572A414A3F2E547A44A99E6 /* Pods_ECGv1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA36E2FEF9BC38BA7D39299 /* Pods_ECGv1Tests.framework */; };
+		49E42E8227C5144700FB6DBB /* ArduPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */; };
 		561471AC27C4ECD7007D7F64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471AB27C4ECD7007D7F64 /* AppDelegate.swift */; };
 		561471AE27C4ECD7007D7F64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */; };
 		561471B027C4ECD7007D7F64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471AF27C4ECD7007D7F64 /* ViewController.swift */; };
@@ -42,6 +43,7 @@
 		3428C7F7C71F8295C1AB6D19 /* Pods_ECGv1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECGv1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46242BDCD25F4F29F2C3F991 /* Pods-ECGv1-ECGv1UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1-ECGv1UITests.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1-ECGv1UITests/Pods-ECGv1-ECGv1UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		467D6B63039E3511B941316B /* Pods-ECGv1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1Tests.release.xcconfig"; path = "Target Support Files/Pods-ECGv1Tests/Pods-ECGv1Tests.release.xcconfig"; sourceTree = "<group>"; };
+		49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArduPeripheral.swift; path = BT/ArduPeripheral.swift; sourceTree = "<group>"; };
 		561471A827C4ECD7007D7F64 /* ECGv1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECGv1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		561471AB27C4ECD7007D7F64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		561471AA27C4ECD7007D7F64 /* ECGv1 */ = {
 			isa = PBXGroup;
 			children = (
+				49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */,
 				561471AB27C4ECD7007D7F64 /* AppDelegate.swift */,
 				561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */,
 				561471AF27C4ECD7007D7F64 /* ViewController.swift */,
@@ -165,7 +168,6 @@
 				7EA53C8CDFD6FE8A52DB2C49 /* Pods-ECGv1Tests.debug.xcconfig */,
 				467D6B63039E3511B941316B /* Pods-ECGv1Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -410,6 +412,7 @@
 				561471B027C4ECD7007D7F64 /* ViewController.swift in Sources */,
 				561471AC27C4ECD7007D7F64 /* AppDelegate.swift in Sources */,
 				561471AE27C4ECD7007D7F64 /* SceneDelegate.swift in Sources */,
+				49E42E8227C5144700FB6DBB /* ArduPeripheral.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
