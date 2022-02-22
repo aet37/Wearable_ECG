@@ -10,6 +10,13 @@
 // you can change the graphs refresh rate on line 51, it's currently set for 250hz
 
 import UIKit
+import CoreBluetooth
+
+class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
+    
+    // Properties for Bluetooth
+    private var centralManager: CBCentralManager!
+    private var peripheral: CBPeripheral!
 import Charts
 
 class ViewController: UIViewController {
@@ -41,6 +48,14 @@ class ViewController: UIViewController {
     /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Bluetooth Central manager
+        
+        //view.backgroundColor = .systemGray
+        view.addSubview(imageView)
+        imageView.frame = CGRect(x: (view.frame.size.width-300)/2, y: 300, width: 300, height: 300)
+        //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        //imageView.center = view.center
         
         view.addSubview(button2)
         view.addSubview(button3)
