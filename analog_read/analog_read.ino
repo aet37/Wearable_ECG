@@ -9,7 +9,7 @@
 
 // Decalre Bueltooth transmission variables and functions
 SoftwareSerial HM10(8, 9);  //RX = 0, TX = 1
-bool transmit = false;
+bool transmit = true;
 void checkTransmissionState(void);
 
 // Declare Analog pin
@@ -31,6 +31,9 @@ void setup()
   // Set BT module BOD rate
   HM10.begin(BOD_R);
 
+  Serial.begin(9600);
+  Serial.println("My Sketch has started");
+
 }
 
 void loop()
@@ -43,11 +46,13 @@ void loop()
   if(transmit)
   {
     // Send data on analog pin
-    HM10.write(analogRead(analogPIN));
+    uint16_t to_send = analogRead(analogPIN);
+    Serial.println(to_send);
+    HM10.write(to_send);
 
     // Set up delay time (1/f) - 4ms for 250Hz
-    delay(4);
-    //delay(100);
+    //delay(4);
+    delay(1000);
   }
   
   /*
