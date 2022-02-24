@@ -9,7 +9,7 @@
 
 // Decalre Bueltooth transmission variables and functions
 SoftwareSerial HM10(8, 9);  //RX = 0, TX = 1
-bool transmit = true;
+bool transmit = false;
 void checkTransmissionState(void);
 
 // Declare Analog pin
@@ -32,7 +32,7 @@ void setup()
   HM10.begin(BOD_R);
 
   Serial.begin(9600);
-  Serial.println("My Sketch has started");
+  Serial.println("Arduino Program Started");
 
 }
 
@@ -46,28 +46,27 @@ void loop()
   if(transmit)
   {
     // Send data on analog pin
-    uint16_t to_send = analogRead(analogPIN);
-    Serial.println(to_send);
-    HM10.write(to_send);
+    byte to_send[2];
+    
+    // Read Analog Pin
+    uint16_t read_pin = analogRead(analogPIN);
+
+    // Break up transmission into 2 byte segemtns
+    // Send with MSB First (Upper byte)
+    to_send[0] = (0xFF00 & read_pin) >> 8;
+    to_send[1] = 0x00FF & read_pin;
+
+    // Print the output to serial monitor (optional)
+    Serial.println(to_send[0]);
+    Serial.println(to_send[1]);
+
+    // Write the bit array
+    HM10.write(to_send, 2);
 
     // Set up delay time (1/f) - 4ms for 250Hz
-    //delay(4);
-    delay(1000);
+    delay(5);
+    //delay(500);
   }
-  
-  /*
-  // Send BT message over Serial Ports if transmit is true
-    for(int i = 0; i < 10; i++)
-    {
-      checkTransmissionState();
-      if(transmit == true)
-      {
-        HM10.write(i);
-        delay(500);
-      }
-    }
-    */
-
 }
 
 void checkTransmissionState()
@@ -76,10 +75,10 @@ void checkTransmissionState()
   while(HM10.available() > 0)
   {
     int state = HM10.read();
+    
     // Read state recieved
     // 8 => Start Transmission
     // 0 => Stop Transmission
-    printf("%d", HM10.available());
     if(state == 8)
     {
       transmit = true;
