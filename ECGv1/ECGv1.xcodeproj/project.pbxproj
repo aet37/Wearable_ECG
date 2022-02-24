@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3572A414A3F2E547A44A99E6 /* Pods_ECGv1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA36E2FEF9BC38BA7D39299 /* Pods_ECGv1Tests.framework */; };
 		49E42E8227C5144700FB6DBB /* ArduPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */; };
+		49EB944827C6C3C20010F366 /* BTQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB944727C6C3C20010F366 /* BTQueue.swift */; };
 		561471AC27C4ECD7007D7F64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471AB27C4ECD7007D7F64 /* AppDelegate.swift */; };
 		561471AE27C4ECD7007D7F64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */; };
 		561471B027C4ECD7007D7F64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471AF27C4ECD7007D7F64 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		46242BDCD25F4F29F2C3F991 /* Pods-ECGv1-ECGv1UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1-ECGv1UITests.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1-ECGv1UITests/Pods-ECGv1-ECGv1UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		467D6B63039E3511B941316B /* Pods-ECGv1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1Tests.release.xcconfig"; path = "Target Support Files/Pods-ECGv1Tests/Pods-ECGv1Tests.release.xcconfig"; sourceTree = "<group>"; };
 		49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArduPeripheral.swift; path = BT/ArduPeripheral.swift; sourceTree = "<group>"; };
+		49EB944727C6C3C20010F366 /* BTQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BTQueue.swift; path = Queue/BTQueue.swift; sourceTree = "<group>"; };
 		561471A827C4ECD7007D7F64 /* ECGv1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECGv1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		561471AB27C4ECD7007D7F64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				561471B427C4ECD8007D7F64 /* Assets.xcassets */,
 				561471B627C4ECD8007D7F64 /* LaunchScreen.storyboard */,
 				561471B927C4ECD8007D7F64 /* Info.plist */,
+				49EB944727C6C3C20010F366 /* BTQueue.swift */,
 			);
 			path = ECGv1;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				561471B027C4ECD7007D7F64 /* ViewController.swift in Sources */,
 				561471AC27C4ECD7007D7F64 /* AppDelegate.swift in Sources */,
 				561471AE27C4ECD7007D7F64 /* SceneDelegate.swift in Sources */,
+				49EB944827C6C3C20010F366 /* BTQueue.swift in Sources */,
 				49E42E8227C5144700FB6DBB /* ArduPeripheral.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,6 +594,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				INFOPLIST_FILE = ECGv1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -609,6 +614,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K4GUD8H29N;
 				INFOPLIST_FILE = ECGv1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

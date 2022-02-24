@@ -53,8 +53,6 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         centralManager = CBCentralManager(delegate: self, queue: nil)
         
         //view.backgroundColor = .systemGray
-        view.addSubview(imageView)
-        imageView.frame = CGRect(x: (view.frame.size.width-300)/2, y: 300, width: 300, height: 300)
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
