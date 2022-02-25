@@ -98,6 +98,7 @@
 		5614719F27C4ECD7007D7F64 = {
 			isa = PBXGroup;
 			children = (
+				6CBFA47B27C88EB70036E7EA /* AlgorithmFiles */,
 				561471AA27C4ECD7007D7F64 /* ECGv1 */,
 				561471C127C4ECD9007D7F64 /* ECGv1Tests */,
 				561471CC27C4ECD9007D7F64 /* ECGv1UITests */,
@@ -149,6 +150,13 @@
 				561471CF27C4ECD9007D7F64 /* Info.plist */,
 			);
 			path = ECGv1UITests;
+			sourceTree = "<group>";
+		};
+		6CBFA47B27C88EB70036E7EA /* AlgorithmFiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AlgorithmFiles;
 			sourceTree = "<group>";
 		};
 		9C209860D010074D49D1A3E5 /* Frameworks */ = {
