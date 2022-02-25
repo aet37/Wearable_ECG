@@ -120,13 +120,20 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     // Handle Vaue recived from Ardu
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        let recieved = UInt8(characteristic.value![0])
+        
+        // Get value recived as 2 seperate bytes
+        let b1 = UInt16(characteristic.value![0])
+        let b2 = UInt16(characteristic.value![1])
+        
+        // Insert b1 and b2 in recieved integer
+        var recieved = UInt16(0)
+        recieved = (b1 << 8) | b2
+        
         Num2.text = Num1.text
         Num1.text = Num0.text
         Num0.text = String(recieved)
         
         print("Received", String(recieved))
-        
         }
 
     // Handle Disconnect

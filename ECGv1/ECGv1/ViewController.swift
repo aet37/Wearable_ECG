@@ -20,7 +20,33 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
     private var arduCh: CBCharacteristic?
-
+    var EKGQueue = BTQueue()
+    
+    /*-------------------------------Bluetooth Start Transmission Switche-------------------------------*/
+    @IBOutlet weak var startSwitch: UISwitch!
+    
+    // Send transmission state to Arduino
+    private func toggleTransmission(withCharachteristic charachteristic: CBCharacteristic) {
+        if peripheral != nil {
+            if startSwitch.isOn {
+                peripheral.writeValue(Data([8]), for: charachteristic, type: .withoutResponse)
+                print("Start Sending")
+            } else {
+                peripheral.writeValue(Data([0]), for: charachteristic, type: .withoutResponse)
+                print("Stop Sending")
+            }
+        } else {
+            print("Problem with BT connection while requesting Send.")
+        }
+    }
+    
+    // Action on button
+    @IBAction func toggleTransmission(_ sender: Any) {
+        // Send correct state via Bluetooth
+        toggleTransmission(withCharachteristic: arduCh!)
+    }
+    
+    
     /*-------------------------------Graph-------------------------------*/
     @IBOutlet weak var lineChartView: LineChartView!
     
@@ -177,7 +203,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
                     peripheral.setNotifyValue(true, for: characteristic)
                     
                     // Enable switch
-                    //startSwitch.isEnabled = true
+                    startSwitch.isEnabled = true
                 }
             }
         }
@@ -188,8 +214,16 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     //
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        print("Received", String(characteristic.value![0]))
+        // Get value recived as 2 seperate bytes
+        let b1 = UInt16(characteristic.value![0])
+        let b2 = UInt16(characteristic.value![1])
         
+        // Insert b1 and b2 in recieved integer
+        var recieved = UInt16(0)
+        recieved = (b1 << 8) | b2
+        
+        // Push the recived value onto the queue
+        EKGQueue.push(val: recieved, periph: peripheral, charach: characteristic)
         }
 
     // Handle Disconnect
@@ -198,7 +232,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             print("Disconnected")
             
             // Disable the switch
-            //startSwitch.isEnabled = false
+            startSwitch.isEnabled = false
         }
         
         // Don't write to unwanted place
