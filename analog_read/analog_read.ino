@@ -21,7 +21,6 @@ int ledPIN = 2;
 // BAUD Rate of tranmission
 int BOD_R = 9600;
 
-
 void setup()
 {
   // Set debug PIN
@@ -31,7 +30,7 @@ void setup()
   // Set BT module BOD rate
   HM10.begin(BOD_R);
 
-  Serial.begin(9600);
+  Serial.begin(BOD_R);
   Serial.println("Arduino Program Started");
 
 }
@@ -57,14 +56,15 @@ void loop()
     to_send[1] = 0x00FF & read_pin;
 
     // Print the output to serial monitor (optional)
-    Serial.println(to_send[0]);
-    Serial.println(to_send[1]);
+    //Serial.println(to_send[0]);
+    //Serial.println(to_send[1]);
+    Serial.println(read_pin);
 
     // Write the bit array
     HM10.write(to_send, 2);
 
     // Set up delay time (1/f) - 4ms for 250Hz
-    delay(5);
+    //delay(4);
     //delay(500);
   }
 }
@@ -82,6 +82,9 @@ void checkTransmissionState()
     if(state == 8)
     {
       transmit = true;
+      HM10.begin(9600);
+
+      delay(10);
       
       // Light LED
       digitalWrite(ledPIN, HIGH);
@@ -89,6 +92,7 @@ void checkTransmissionState()
     else
     {
       transmit = false;
+      HM10.begin(BOD_R);
 
       // Disable LED
       digitalWrite(ledPIN, LOW);

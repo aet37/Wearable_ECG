@@ -30,8 +30,8 @@ class BTQueue {
             // Add value to queue
             valuesArr.append(val)
             
-            //print("Recived", val)   // Debug log
-            print(valuesArr.count)
+            print("Recived", val)   // Debug log
+            //print(valuesArr.count)
         }
     }
     
