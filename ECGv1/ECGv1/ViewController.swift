@@ -14,6 +14,7 @@ import UIKit
 import CoreBluetooth
 import Charts
 
+
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
     /*-------------------------------Bluetooth-------------------------------*/
