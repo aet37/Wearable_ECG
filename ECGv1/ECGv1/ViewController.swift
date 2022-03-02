@@ -82,7 +82,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
+        int heartRate;
+        ECG_Algorithm(heartRate);
+        
         view.addSubview(button2)
+        view.addSubview(heartRate);
         view.addSubview(button3)
         
         setChartValues()

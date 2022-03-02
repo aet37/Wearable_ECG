@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:-BridgeHeader.h">
+   </FileRef>
+   <FileRef
       location = "group:ECGv1.xcodeproj">
    </FileRef>
    <FileRef
