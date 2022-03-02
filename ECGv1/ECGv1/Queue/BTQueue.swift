@@ -47,4 +47,15 @@ class BTQueue {
         // Return the popped value
         return to_return
     }
+    
+    func isEmpty() -> Bool {
+        
+        var len = valuesArr.count
+        if (len == 0){
+            return true
+        }
+        else{
+            return false
+        }
+    }
 }
