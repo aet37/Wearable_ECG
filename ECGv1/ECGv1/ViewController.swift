@@ -13,7 +13,7 @@
 import UIKit
 import CoreBluetooth
 import Charts
-import ../TestAdd/ECGv1-Bridging-Header
+//import "../TestAdd/ECGv1-Bridging-Header.h"
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -71,6 +71,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         return button3
     }()
     
+    @IBOutlet weak var Addtest: UILabel!
     
     /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
@@ -83,12 +84,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
-        let A = 32;
-        let B = 30;
-        let sumAB = addAB(A,B);
+        let A = 32.0;
+        let B = 30.0;
+        let value_test = addAB(A,B);
+        Addtest.text((value_test));
         
         view.addSubview(button2)
-        view.addSubview(sumAB);
+        view.addSubview(Addtest);
         view.addSubview(button3)
         
         setChartValues()
