@@ -18,6 +18,21 @@
 		561471B827C4ECD8007D7F64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561471B627C4ECD8007D7F64 /* LaunchScreen.storyboard */; };
 		561471C327C4ECD9007D7F64 /* ECGv1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471C227C4ECD9007D7F64 /* ECGv1Tests.swift */; };
 		561471CE27C4ECD9007D7F64 /* ECGv1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471CD27C4ECD9007D7F64 /* ECGv1UITests.swift */; };
+		6C87F53727CFF3A300D32705 /* addAB_terminate.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C87F52227CFF3A300D32705 /* addAB_terminate.c */; };
+		6C87F53827CFF3A300D32705 /* codedescriptor.dmr in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52327CFF3A300D32705 /* codedescriptor.dmr */; };
+		6C87F53927CFF3A300D32705 /* addAB_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C87F52527CFF3A300D32705 /* addAB_data.c */; };
+		6C87F53A27CFF3A300D32705 /* buildInfo.mat in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52627CFF3A300D32705 /* buildInfo.mat */; };
+		6C87F53B27CFF3A300D32705 /* addAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C87F52727CFF3A300D32705 /* addAB.c */; };
+		6C87F53C27CFF3A300D32705 /* examples in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52827CFF3A300D32705 /* examples */; };
+		6C87F53D27CFF3A300D32705 /* _clang-format in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52A27CFF3A300D32705 /* _clang-format */; };
+		6C87F53E27CFF3A300D32705 /* codeInfo.mat in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52C27CFF3A300D32705 /* codeInfo.mat */; };
+		6C87F53F27CFF3A300D32705 /* compileInfo.mat in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52D27CFF3A300D32705 /* compileInfo.mat */; };
+		6C87F54027CFF3A300D32705 /* defines.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52E27CFF3A300D32705 /* defines.txt */; };
+		6C87F54127CFF3A300D32705 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F52F27CFF3A300D32705 /* html */; };
+		6C87F54227CFF3A300D32705 /* addAB_initialize.c in Sources */ = {isa = PBXBuildFile; fileRef = 6C87F53127CFF3A300D32705 /* addAB_initialize.c */; };
+		6C87F54327CFF3A300D32705 /* rtw_proj.tmw in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F53227CFF3A300D32705 /* rtw_proj.tmw */; };
+		6C87F54427CFF3A300D32705 /* addAB_rtw.mk in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F53327CFF3A300D32705 /* addAB_rtw.mk */; };
+		6C87F54527CFF3A300D32705 /* interface in Resources */ = {isa = PBXBuildFile; fileRef = 6C87F53627CFF3A300D32705 /* interface */; };
 		B4660F917D194A119A79789F /* Pods_ECGv1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3428C7F7C71F8295C1AB6D19 /* Pods_ECGv1.framework */; };
 		BC9260EAEBE7637607E80C3E /* Pods_ECGv1_ECGv1UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B3A9072B6197CC3C493922 /* Pods_ECGv1_ECGv1UITests.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +77,28 @@
 		561471CF27C4ECD9007D7F64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62B3A9072B6197CC3C493922 /* Pods_ECGv1_ECGv1UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECGv1_ECGv1UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A03ACCBA4C02B3B1C390871 /* Pods-ECGv1-ECGv1UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1-ECGv1UITests.release.xcconfig"; path = "Target Support Files/Pods-ECGv1-ECGv1UITests/Pods-ECGv1-ECGv1UITests.release.xcconfig"; sourceTree = "<group>"; };
+		6C87F52127CFF3A300D32705 /* ECGv1-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECGv1-Bridging-Header.h"; sourceTree = "<group>"; };
+		6C87F52227CFF3A300D32705 /* addAB_terminate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = addAB_terminate.c; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_terminate.c"; sourceTree = "<group>"; };
+		6C87F52327CFF3A300D32705 /* codedescriptor.dmr */ = {isa = PBXFileReference; lastKnownFileType = file; name = codedescriptor.dmr; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/codedescriptor.dmr"; sourceTree = "<group>"; };
+		6C87F52427CFF3A300D32705 /* addAB_initialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addAB_initialize.h; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_initialize.h"; sourceTree = "<group>"; };
+		6C87F52527CFF3A300D32705 /* addAB_data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = addAB_data.c; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_data.c"; sourceTree = "<group>"; };
+		6C87F52627CFF3A300D32705 /* buildInfo.mat */ = {isa = PBXFileReference; lastKnownFileType = file; name = buildInfo.mat; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/buildInfo.mat"; sourceTree = "<group>"; };
+		6C87F52727CFF3A300D32705 /* addAB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = addAB.c; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB.c"; sourceTree = "<group>"; };
+		6C87F52827CFF3A300D32705 /* examples */ = {isa = PBXFileReference; lastKnownFileType = folder; name = examples; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/examples"; sourceTree = "<group>"; };
+		6C87F52927CFF3A300D32705 /* addAB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addAB.h; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB.h"; sourceTree = "<group>"; };
+		6C87F52A27CFF3A300D32705 /* _clang-format */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "_clang-format"; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/_clang-format"; sourceTree = "<group>"; };
+		6C87F52B27CFF3A300D32705 /* addAB_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addAB_types.h; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_types.h"; sourceTree = "<group>"; };
+		6C87F52C27CFF3A300D32705 /* codeInfo.mat */ = {isa = PBXFileReference; lastKnownFileType = file; name = codeInfo.mat; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/codeInfo.mat"; sourceTree = "<group>"; };
+		6C87F52D27CFF3A300D32705 /* compileInfo.mat */ = {isa = PBXFileReference; lastKnownFileType = file; name = compileInfo.mat; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/compileInfo.mat"; sourceTree = "<group>"; };
+		6C87F52E27CFF3A300D32705 /* defines.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = defines.txt; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/defines.txt"; sourceTree = "<group>"; };
+		6C87F52F27CFF3A300D32705 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/html"; sourceTree = "<group>"; };
+		6C87F53027CFF3A300D32705 /* addAB_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addAB_data.h; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_data.h"; sourceTree = "<group>"; };
+		6C87F53127CFF3A300D32705 /* addAB_initialize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = addAB_initialize.c; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_initialize.c"; sourceTree = "<group>"; };
+		6C87F53227CFF3A300D32705 /* rtw_proj.tmw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = rtw_proj.tmw; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/rtw_proj.tmw"; sourceTree = "<group>"; };
+		6C87F53327CFF3A300D32705 /* addAB_rtw.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = addAB_rtw.mk; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_rtw.mk"; sourceTree = "<group>"; };
+		6C87F53427CFF3A300D32705 /* rtwtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rtwtypes.h; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/rtwtypes.h"; sourceTree = "<group>"; };
+		6C87F53527CFF3A300D32705 /* addAB_terminate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addAB_terminate.h; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/addAB_terminate.h"; sourceTree = "<group>"; };
+		6C87F53627CFF3A300D32705 /* interface */ = {isa = PBXFileReference; lastKnownFileType = folder; name = interface; path = "../../../MATLAB/ECE-1896: Senior Design/codegen/lib/addAB/interface"; sourceTree = "<group>"; };
 		7EA53C8CDFD6FE8A52DB2C49 /* Pods-ECGv1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1Tests.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1Tests/Pods-ECGv1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		84629BB93B54C69EAAF0B36A /* Pods-ECGv1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.debug.xcconfig"; sourceTree = "<group>"; };
 		E50356C736A02481892EE6D4 /* Pods-ECGv1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.release.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.release.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +135,7 @@
 		5614719F27C4ECD7007D7F64 = {
 			isa = PBXGroup;
 			children = (
+				6C87F52027CFF35F00D32705 /* TestAdd */,
 				6CBFA47B27C88EB70036E7EA /* AlgorithmFiles */,
 				561471AA27C4ECD7007D7F64 /* ECGv1 */,
 				561471C127C4ECD9007D7F64 /* ECGv1Tests */,
@@ -150,6 +188,35 @@
 				561471CF27C4ECD9007D7F64 /* Info.plist */,
 			);
 			path = ECGv1UITests;
+			sourceTree = "<group>";
+		};
+		6C87F52027CFF35F00D32705 /* TestAdd */ = {
+			isa = PBXGroup;
+			children = (
+				6C87F52A27CFF3A300D32705 /* _clang-format */,
+				6C87F52527CFF3A300D32705 /* addAB_data.c */,
+				6C87F53027CFF3A300D32705 /* addAB_data.h */,
+				6C87F53127CFF3A300D32705 /* addAB_initialize.c */,
+				6C87F52427CFF3A300D32705 /* addAB_initialize.h */,
+				6C87F53327CFF3A300D32705 /* addAB_rtw.mk */,
+				6C87F52227CFF3A300D32705 /* addAB_terminate.c */,
+				6C87F53527CFF3A300D32705 /* addAB_terminate.h */,
+				6C87F52B27CFF3A300D32705 /* addAB_types.h */,
+				6C87F52727CFF3A300D32705 /* addAB.c */,
+				6C87F52927CFF3A300D32705 /* addAB.h */,
+				6C87F52627CFF3A300D32705 /* buildInfo.mat */,
+				6C87F52327CFF3A300D32705 /* codedescriptor.dmr */,
+				6C87F52C27CFF3A300D32705 /* codeInfo.mat */,
+				6C87F52D27CFF3A300D32705 /* compileInfo.mat */,
+				6C87F52E27CFF3A300D32705 /* defines.txt */,
+				6C87F52827CFF3A300D32705 /* examples */,
+				6C87F52F27CFF3A300D32705 /* html */,
+				6C87F53627CFF3A300D32705 /* interface */,
+				6C87F53227CFF3A300D32705 /* rtw_proj.tmw */,
+				6C87F53427CFF3A300D32705 /* rtwtypes.h */,
+				6C87F52127CFF3A300D32705 /* ECGv1-Bridging-Header.h */,
+			);
+			path = TestAdd;
 			sourceTree = "<group>";
 		};
 		6CBFA47B27C88EB70036E7EA /* AlgorithmFiles */ = {
@@ -254,6 +321,7 @@
 				TargetAttributes = {
 					561471A727C4ECD7007D7F64 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1320;
 					};
 					561471BD27C4ECD9007D7F64 = {
 						CreatedOnToolsVersion = 12.4;
@@ -290,9 +358,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C87F53D27CFF3A300D32705 /* _clang-format in Resources */,
 				561471B827C4ECD8007D7F64 /* LaunchScreen.storyboard in Resources */,
+				6C87F53827CFF3A300D32705 /* codedescriptor.dmr in Resources */,
+				6C87F53F27CFF3A300D32705 /* compileInfo.mat in Resources */,
+				6C87F54427CFF3A300D32705 /* addAB_rtw.mk in Resources */,
+				6C87F53E27CFF3A300D32705 /* codeInfo.mat in Resources */,
+				6C87F54327CFF3A300D32705 /* rtw_proj.tmw in Resources */,
+				6C87F54127CFF3A300D32705 /* html in Resources */,
 				561471B527C4ECD8007D7F64 /* Assets.xcassets in Resources */,
+				6C87F53C27CFF3A300D32705 /* examples in Resources */,
+				6C87F54527CFF3A300D32705 /* interface in Resources */,
+				6C87F54027CFF3A300D32705 /* defines.txt in Resources */,
 				561471B327C4ECD7007D7F64 /* Main.storyboard in Resources */,
+				6C87F53A27CFF3A300D32705 /* buildInfo.mat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,8 +499,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C87F54227CFF3A300D32705 /* addAB_initialize.c in Sources */,
+				6C87F53727CFF3A300D32705 /* addAB_terminate.c in Sources */,
 				561471B027C4ECD7007D7F64 /* ViewController.swift in Sources */,
+				6C87F53927CFF3A300D32705 /* addAB_data.c in Sources */,
 				561471AC27C4ECD7007D7F64 /* AppDelegate.swift in Sources */,
+				6C87F53B27CFF3A300D32705 /* addAB.c in Sources */,
 				561471AE27C4ECD7007D7F64 /* SceneDelegate.swift in Sources */,
 				49EB944827C6C3C20010F366 /* BTQueue.swift in Sources */,
 				49E42E8227C5144700FB6DBB /* ArduPeripheral.swift in Sources */,
@@ -601,6 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K4GUD8H29N;
 				INFOPLIST_FILE = ECGv1/Info.plist;
@@ -610,6 +694,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bobbyrouse.ECGv1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TestAdd/ECGv1-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -621,6 +707,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K4GUD8H29N;
 				INFOPLIST_FILE = ECGv1/Info.plist;
@@ -630,6 +717,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bobbyrouse.ECGv1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TestAdd/ECGv1-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

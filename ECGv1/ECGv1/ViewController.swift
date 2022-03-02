@@ -13,6 +13,7 @@
 import UIKit
 import CoreBluetooth
 import Charts
+import ../TestAdd/ECGv1-Bridging-Header
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -82,11 +83,12 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
-        int heartRate;
-        ECG_Algorithm(heartRate);
+        let A = 32;
+        let B = 30;
+        let sumAB = addAB(A,B);
         
         view.addSubview(button2)
-        view.addSubview(heartRate);
+        view.addSubview(sumAB);
         view.addSubview(button3)
         
         setChartValues()
