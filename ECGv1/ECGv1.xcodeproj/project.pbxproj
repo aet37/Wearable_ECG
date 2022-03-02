@@ -108,7 +108,7 @@
 		6C87F59B27D00B6D00D32705 /* addAB_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addAB_types.h; sourceTree = "<group>"; };
 		6C87F59C27D00B6D00D32705 /* rtwtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtwtypes.h; sourceTree = "<group>"; };
 		6C87F59D27D00B6D00D32705 /* addAB_rtw.mk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addAB_rtw.mk; sourceTree = "<group>"; };
-		6C87F5B027D00BC400D32705 /* ECGv1-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ECGv1-Bridging-Header.h"; path = "TestAdd/ECGv1-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		6C87F5B127D00C4900D32705 /* ECGv1-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECGv1-Bridging-Header.h"; sourceTree = "<group>"; };
 		7EA53C8CDFD6FE8A52DB2C49 /* Pods-ECGv1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1Tests.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1Tests/Pods-ECGv1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		84629BB93B54C69EAAF0B36A /* Pods-ECGv1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.debug.xcconfig"; sourceTree = "<group>"; };
 		E50356C736A02481892EE6D4 /* Pods-ECGv1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.release.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.release.xcconfig"; sourceTree = "<group>"; };
@@ -203,7 +203,6 @@
 		6C87F57E27D00B6D00D32705 /* addAB */ = {
 			isa = PBXGroup;
 			children = (
-				6C87F5B027D00BC400D32705 /* ECGv1-Bridging-Header.h */,
 				6C87F57F27D00B6D00D32705 /* rtw_proj.tmw */,
 				6C87F58027D00B6D00D32705 /* compileInfo.mat */,
 				6C87F58127D00B6D00D32705 /* codeInfo.mat */,
@@ -226,6 +225,7 @@
 				6C87F59B27D00B6D00D32705 /* addAB_types.h */,
 				6C87F59C27D00B6D00D32705 /* rtwtypes.h */,
 				6C87F59D27D00B6D00D32705 /* addAB_rtw.mk */,
+				6C87F5B127D00C4900D32705 /* ECGv1-Bridging-Header.h */,
 			);
 			path = addAB;
 			sourceTree = "<group>";
