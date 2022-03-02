@@ -21,7 +21,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
     private var arduCh: CBCharacteristic?
-    var EKGQueue = BTQueue()
+    var EKGQueue = BTQueue() //devliery queue
     
     /*-------------------------------Bluetooth Start Transmission Switche-------------------------------*/
     @IBOutlet weak var startSwitch: UISwitch!
@@ -89,7 +89,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         setChartValues()
         
         //currently set for 250 hz, timeInterval is in ms
-        _ = Timer.scheduledTimer(timeInterval: 0.04, target:self, selector: #selector(self.setChartValues), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -111,9 +111,26 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     }
     
     
+    
+    
     /*-------------------------------Chart Values-------------------------------*/
     
     var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1200)
+    
+    //new test chart updater
+    @objc func updateChartValues(){
+        if(EKGQueue.isEmpty() == false){
+            var newVal = EKGQueue.pop()
+            valuesArr.removeFirst()
+            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            
+        }
+        let set1 = LineChartDataSet(entries: valuesArr, label: "dataset 1")
+        set1.drawCirclesEnabled = false
+        let data = LineChartData(dataSet: set1)
+        
+        self.lineChartView.data = data
+    }
     
     @objc func setValues(){
         
