@@ -17,7 +17,7 @@ class BTQueue {
     func push(val: UInt16, periph: CBPeripheral, charach: CBCharacteristic) {
         
         // Make sure the phone memory does not overfill if app is not handling data
-        if(valuesArr.count >= 1200) {
+        if(valuesArr.count >= 10000) {
             print("Queue Limit Reached")    // Debug log
             
             // Disable Send to BT
@@ -31,7 +31,7 @@ class BTQueue {
             valuesArr.append(val)
             
             print("Recived", val)   // Debug log
-            //print(valuesArr.count)
+            //print("R")
         }
     }
     
@@ -49,8 +49,7 @@ class BTQueue {
     }
     
     func isEmpty() -> Bool {
-        
-        var len = valuesArr.count
+        let len = valuesArr.count
         if (len == 0){
             return true
         }
