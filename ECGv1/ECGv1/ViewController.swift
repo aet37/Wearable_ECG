@@ -21,6 +21,12 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
     private var arduCh: CBCharacteristic?
+    
+    // For reciving values from BT
+    var b1 = UInt16(0)
+    var b2 = UInt16(0)
+    var recieved = UInt16(0)
+    
     var EKGQueue = BTQueue() //devliery queue
     
     /*-------------------------------Bluetooth Start Transmission Switche-------------------------------*/
@@ -86,10 +92,10 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         view.addSubview(button2)
         view.addSubview(button3)
         
-        setChartValues()
+        initChart()
         
         //currently set for 250 hz, timeInterval is in ms
-        _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 0.001, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -115,43 +121,40 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     /*-------------------------------Chart Values-------------------------------*/
     
-    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1200)
+    let numVal = 500
     
-    //new test chart updater
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 500)
+    
+    
+    //new chart updater
     @objc func updateChartValues(){
         if(EKGQueue.isEmpty() == false){
-            var newVal = EKGQueue.pop()
+            let newVal = EKGQueue.pop()
             valuesArr.removeFirst()
             valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
             
+            for i in 0..<numVal {
+                valuesArr[i].x = Double(i)
+                valuesArr[i].y = Double(valuesArr[i].y)
+            }
+            
         }
-        let set1 = LineChartDataSet(entries: valuesArr, label: "dataset 1")
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
         let data = LineChartData(dataSet: set1)
         
         self.lineChartView.data = data
     }
     
-    @objc func setValues(){
+    @objc func initChart(){
         
-        //This loop demonstrates functionality, comment out when you have our input connected
-        for i in 0..<1200 {
-            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(arc4random_uniform(UInt32(20)) + 3))
+        for i in 0..<numVal {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
         }
         
-        //This will add our data to the graph
-        /*
-        var newVal = /*NEWVALUE*/ //should be a number
-        let first1 = valuesArr.removeFirst()
-        valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal))
-        */
-        
-    }
-    
-    @objc func setChartValues(){
-        setValues()
-        
-        let set1 = LineChartDataSet(entries: valuesArr, label: "dataset 1")
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         let data = LineChartData(dataSet: set1)
         
@@ -232,16 +235,18 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     //
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        // Get value recived as 2 seperate bytes
-        let b1 = UInt16(characteristic.value![0])
-        let b2 = UInt16(characteristic.value![1])
-        
-        // Insert b1 and b2 in recieved integer
-        var recieved = UInt16(0)
-        recieved = (b1 << 8) | b2
-        
-        // Push the recived value onto the queue
-        EKGQueue.push(val: recieved, periph: peripheral, charach: characteristic)
+        for i in 0..<(characteristic.value!.count)/2 {
+            
+            // Get value recived as 2 seperate bytes
+            b1 = UInt16(characteristic.value![i*2])
+            b2 = UInt16(characteristic.value![(i*2) + 1])
+            
+            // Insert b1 and b2 in recieved integer
+            recieved = (b1 << 8) | b2
+            
+            // Push the recived value onto the queue
+            EKGQueue.push(val: recieved, periph: peripheral, charach: characteristic)
+            }
         }
 
     // Handle Disconnect

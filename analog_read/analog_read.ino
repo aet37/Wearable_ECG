@@ -21,6 +21,10 @@ int ledPIN = 2;
 // BAUD Rate of tranmission
 int BOD_R = 9600;
 
+// For Bluetooth purposes
+byte to_send[2];
+uint16_t read_pin;
+
 void setup()
 {
   // Set debug PIN
@@ -32,11 +36,14 @@ void setup()
 
   Serial.begin(BOD_R);
   Serial.println("Arduino Program Started");
-
 }
+
+unsigned long time1, time2;
 
 void loop()
 {
+  
+  //time1 = millis();
   
   // Check if should transmit
   checkTransmissionState();
@@ -44,11 +51,8 @@ void loop()
   // Sample and Transmit if needed
   if(transmit)
   {
-    // Send data on analog pin
-    byte to_send[2];
-    
     // Read Analog Pin
-    uint16_t read_pin = analogRead(analogPIN);
+    read_pin = analogRead(analogPIN);
 
     // Break up transmission into 2 byte segemtns
     // Send with MSB First (Upper byte)
@@ -58,15 +62,18 @@ void loop()
     // Print the output to serial monitor (optional)
     //Serial.println(to_send[0]);
     //Serial.println(to_send[1]);
-    Serial.println(read_pin);
+    //Serial.println(read_pin);
 
+    
+    
     // Write the bit array
     HM10.write(to_send, 2);
 
-    // Set up delay time (1/f) - 4ms for 250Hz
-    //delay(4);
-    //delay(500);
+    delay(3);
   }
+  
+  //time2 = millis();
+  //Serial.println(time2 - time1);
 }
 
 void checkTransmissionState()
