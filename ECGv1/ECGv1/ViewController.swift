@@ -13,7 +13,6 @@
 import UIKit
 import CoreBluetooth
 import Charts
-//import "../TestAdd/ECGv1-Bridging-Header.h"
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -84,13 +83,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
-        let A = 32.0;
-        let B = 30.0;
-        let value_test = addAB(A,B);
-        Addtest.text(String(value_test));
+        let ECG_data = [100,200]
+        let heartRate = "0"
+        let leadsFlipped = false
+        let answer = AlgHRandLeads(ECG_data, heartRate, leadsFlipped)
+        button2.setTitle(heartRate, for: .normal)
         
         view.addSubview(button2)
-        view.addSubview(Addtest);
         view.addSubview(button3)
         
         setChartValues()
