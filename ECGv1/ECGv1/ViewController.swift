@@ -87,7 +87,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         let A = 32.0;
         let B = 30.0;
         let value_test = addAB(A,B);
-        Addtest.text((value_test));
+        Addtest.text(String(value_test));
         
         view.addSubview(button2)
         view.addSubview(Addtest);
