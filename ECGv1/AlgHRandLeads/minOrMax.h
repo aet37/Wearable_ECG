@@ -14,7 +14,7 @@
 
 /* Include files */
 #include "rtwtypes.h"
-#include "omp.h"
+//#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 

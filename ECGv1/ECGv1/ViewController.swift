@@ -13,6 +13,7 @@
 import UIKit
 import CoreBluetooth
 import Charts
+import data1
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -87,9 +88,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         let heartRate = "0"
         let leadsFlipped = false
         let answer = AlgHRandLeads(ECG_data, heartRate, leadsFlipped)
-        button2.setTitle(heartRate, for: .normal)
         
         view.addSubview(button2)
+        button2.setTitle(heartRate, for: .normal)
         view.addSubview(button3)
         
         setChartValues()
