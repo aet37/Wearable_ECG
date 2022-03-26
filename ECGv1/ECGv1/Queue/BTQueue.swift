@@ -30,7 +30,10 @@ class BTQueue {
             // Add value to queue
             valuesArr.append(val)
             
-            print("Recived", val)   // Debug log
+            // Should alert view controller every time push method is called
+            NotificationCenter.default.post(name: Notification.Name("push"), object: nil)
+            
+            //print("Recived", val)   // Debug log
             //print("R")
         }
     }

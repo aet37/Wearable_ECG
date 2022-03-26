@@ -21,6 +21,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
     private var arduCh: CBCharacteristic?
+
     
     // For reciving values from BT
     var b1 = UInt16(0)
@@ -94,8 +95,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         initChart()
         
-        //currently set for 250 hz, timeInterval is in ms
-        _ = Timer.scheduledTimer(timeInterval: 0.001, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
+        // Notification to call chart updater every time something is recived in queue
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -125,9 +126,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 500)
     
+    // Listen for pushed() notification
+    
     
     //new chart updater
-    @objc func updateChartValues(){
+    @objc func updateChartValues(notification: NSNotification){
         if(EKGQueue.isEmpty() == false){
             let newVal = EKGQueue.pop()
             valuesArr.removeFirst()
