@@ -69,7 +69,7 @@ void loop()
     // Write the bit array
     HM10.write(to_send, 2);
 
-    delay(3);
+    delay(1);
   }
   
   //time2 = millis();
