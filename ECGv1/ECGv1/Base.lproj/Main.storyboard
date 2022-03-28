@@ -50,20 +50,12 @@
                                     <action selector="toggleTransmission:" destination="BYZ-38-t0r" eventType="valueChanged" id="eOC-X2-4NQ"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g0E-pb-ZWY">
-                                <rect key="frame" x="16" y="66" width="107" height="82"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="ECG Display" id="PJr-Af-Mwm"/>
                     <connections>
-                        <outlet property="Addtest" destination="g0E-pb-ZWY" id="3Rq-hI-P2Y"/>
                         <outlet property="lineChartView" destination="IJZ-E3-xhQ" id="zHn-65-tda"/>
                         <outlet property="startSwitch" destination="HSc-Eu-kDH" id="KNr-gq-flE"/>
                     </connections>
