@@ -13,7 +13,9 @@
 import UIKit
 import CoreBluetooth
 import Charts
-import data1
+import Numerics
+import Foundation
+import Accelerate
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -71,7 +73,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         return button3
     }()
     
-    @IBOutlet weak var Addtest: UILabel!
+//    @IBOutlet weak var Addtest: UILabel!
     
     /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
@@ -84,13 +86,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
-        let ECG_data = [100,200]
-        let heartRate = "0"
-        let leadsFlipped = false
-        let answer = AlgHRandLeads(ECG_data, heartRate, leadsFlipped)
+        
         
         view.addSubview(button2)
-        button2.setTitle(heartRate, for: .normal)
+//        var str = heartRate.pointee
+//        button2.setTitle(String(str), for: .normal)
         view.addSubview(button3)
         
         setChartValues()
@@ -140,6 +140,15 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     @objc func setChartValues(){
         setValues()
+        
+        let testECGdata = getCSVData(dataFile: "./data1.csv");
+        
+        
+        let coeffs = polynomialFit(samples: testECGdata.count, values: testECGdata, order: 9);
+        print(coeffs);
+//        let HR, leads, polydata = AlgHRandLeads(ECG_data: testECGdata);
+        
+//        valuesArr = polydata;
         
         let set1 = LineChartDataSet(entries: valuesArr, label: "dataset 1")
         set1.drawCirclesEnabled = false
@@ -250,4 +259,5 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         print("Central scanning for", ArduPeripheral.ArduUUID);
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
     }
+    
 }

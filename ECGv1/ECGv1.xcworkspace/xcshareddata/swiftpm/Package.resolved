@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "LASwift",
+        "repositoryURL": "https://github.com/AlexanderTar/LASwift.git",
+        "state": {
+          "branch": null,
+          "revision": "34bba6eaac5c030aa065f255e4392d2d8cc41ba5",
+          "version": "0.2.5"
+        }
+      },
+      {
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble.git",
+        "state": {
+          "branch": null,
+          "revision": "7a46a5fc86cb917f69e3daf79fcb045283d8f008",
+          "version": "8.1.2"
+        }
+      },
+      {
+        "package": "Quick",
+        "repositoryURL": "https://github.com/Quick/Quick.git",
+        "state": {
+          "branch": null,
+          "revision": "09b3becb37cb2163919a3842a4c5fa6ec7130792",
+          "version": "2.2.1"
+        }
+      },
+      {
+        "package": "swift-numerics",
+        "repositoryURL": "https://github.com/apple/swift-numerics.git",
+        "state": {
+          "branch": null,
+          "revision": "0a5bc04095a675662cf24757cc0640aa2204253b",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "SwiftMatrix",
+        "repositoryURL": "https://github.com/theolternative/SwiftMatrix",
+        "state": {
+          "branch": "main",
+          "revision": "f9b3fb8e86c80addd5dfddeda143695b44c15db4",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
