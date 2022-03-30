@@ -122,9 +122,12 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     /*-------------------------------Chart Values-------------------------------*/
     
-    let numVal = 500
+    let numVal = 1000
     
-    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 500)
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
+    
+    
+    var globalFilterTime = 0.0
     
     // Listen for pushed() notification
     
@@ -132,7 +135,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     //new chart updater
     @objc func updateChartValues(notification: NSNotification){
         if(EKGQueue.isEmpty() == false){
-            let newVal = EKGQueue.pop()
+            var newVal = Double(EKGQueue.pop())
+                        
+            // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
+            newVal = continuousFilter(newVal: newVal)
+            
             valuesArr.removeFirst()
             valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
             
@@ -163,6 +170,39 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         self.lineChartView.data = data
         
+    }
+    
+    func continuousFilter(newVal: Double) -> Double{
+        //increment time
+        globalFilterTime += 1.0
+        
+        //inputs
+        var xOld = (globalFilterTime + 1.0)/115.0
+        var yOld = newVal
+        var xNew = (globalFilterTime)/115.0
+        var yNew = 0.0
+        
+        //note: x = dt * array position
+        var dt = 1.0/115.0
+        var cutoff = 50.0
+        var alpha = dt / (dt + 1.0 / (Double.pi * 2 * cutoff))
+        
+        //lowpass
+        yNew = xNew * alpha + (1 - alpha) * yOld
+        
+        //highpass
+        yNew = alpha * (yNew + xOld - xNew)
+        
+        
+        /*
+        var xVal = 0.0
+        var yVal = newVal
+        var lowVal = xVal * alpha + (1 - alpha) * yVal
+        var highVal = alpha * (yVal + xVal)
+        */
+        
+        //returns double
+        return yNew
     }
     
     /*-------------------------------Bluetooth-------------------------------*/
