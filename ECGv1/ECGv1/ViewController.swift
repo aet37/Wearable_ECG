@@ -14,6 +14,17 @@ import UIKit
 import CoreBluetooth
 import Charts
 
+extension UILabel {
+    @IBInspectable
+    var rotation: Int {
+        get {
+            return 0
+        } set {
+            let radians = CGFloat(CGFloat(Double.pi) * CGFloat(newValue) / CGFloat(180.0))
+            self.transform = CGAffineTransform(rotationAngle: radians)
+        }
+    }
+}
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -32,6 +43,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     /*-------------------------------Bluetooth Start Transmission Switche-------------------------------*/
     @IBOutlet weak var startSwitch: UISwitch!
+    
+    
+    
     
     // Send transmission state to Arduino
     private func toggleTransmission(withCharachteristic charachteristic: CBCharacteristic) {
@@ -79,6 +93,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     }()
     
     
+  //  @IBOutlet weak var graphYlabel : UILabel!
+    
+    
     /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +109,27 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         view.addSubview(button2)
         view.addSubview(button3)
+        
+       //graphYlabel.transform
+        
+        
+        
+        
+        //set y axis range
+        self.lineChartView.leftAxis.axisMaximum = 5
+        self.lineChartView.rightAxis.axisMaximum = 5
+        self.lineChartView.leftAxis.axisMinimum = 0
+        self.lineChartView.rightAxis.axisMinimum = 0
+        
+      
+        /*
+        let months = ["Jan", "feb"]
+        self.lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:months)
+        self.lineChartView.xAxis.granularity = 1
+        */
+        
+        
+        
         
         initChart()
         
@@ -122,33 +160,76 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     /*-------------------------------Chart Values-------------------------------*/
     
-    let numVal = 500
+    let numVal = 1000
     
-    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 500)
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
     
+    var globalFilterTime = 0.0
     // Listen for pushed() notification
     
     
     //new chart updater
     @objc func updateChartValues(notification: NSNotification){
         if(EKGQueue.isEmpty() == false){
-            let newVal = EKGQueue.pop()
+            var newVal = Double(EKGQueue.pop())
+            
+           // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
+            newVal = continuousFilter(newVal: newVal)
+            
+            //add cont filter here
+            //if(continuousFilter(newVal: Double(newVal), arr: valuesArr) == true){
             valuesArr.removeFirst()
-            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            valuesArr.append(ChartDataEntry(x: Double(999), y: Double(newVal)))
             
             for i in 0..<numVal {
                 valuesArr[i].x = Double(i)
                 valuesArr[i].y = Double(valuesArr[i].y)
-            }
-            
+                }
+            //}
         }
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         set1.drawValuesEnabled = false
         set1.lineWidth = 3.0
+        
         let data = LineChartData(dataSet: set1)
         
+       
         self.lineChartView.data = data
+    }
+    
+    
+    func continuousFilter(newVal: Double) -> Double{
+        //increment time
+        globalFilterTime += 1.0
+        
+        //inputs
+        var xOld = (globalFilterTime + 1.0)/115.0
+        var yOld = newVal
+        var xNew = (globalFilterTime)/115.0
+        var yNew = 0.0
+        
+        //note: x = dt * array position
+        var dt = 1.0/115.0
+        var cutoff = 50.0
+        var alpha = dt / (dt + 1.0 / (Double.pi * 2 * cutoff))
+        
+        //lowpass
+        yNew = xNew * alpha + (1 - alpha) * yOld
+        
+        //highpass
+        yNew = alpha * (yNew + xOld - xNew)
+        
+        
+        /*
+        var xVal = 0.0
+        var yVal = newVal
+        var lowVal = xVal * alpha + (1 - alpha) * yVal
+        var highVal = alpha * (yVal + xVal)
+        */
+        
+        //returns double
+        return yNew
     }
     
     @objc func initChart(){
