@@ -6,7 +6,8 @@ target 'ECGv1' do
   use_frameworks!
 
   # Pods for ECGv1
-  pod 'Charts'
+  pod 'Charts', '~>3.6.0'
+  pod 'NVDSP', '~>0.0.1'
 
   target 'ECGv1Tests' do
     inherit! :search_paths

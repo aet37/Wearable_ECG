@@ -13,6 +13,7 @@
 import UIKit
 import CoreBluetooth
 import Charts
+import NVDSP
 
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
@@ -94,7 +95,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         view.addSubview(button3)
         
         initChart()
-        
+   
         // Notification to call chart updater every time something is recived in queue
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
     }
@@ -138,10 +139,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             var newVal = Double(EKGQueue.pop())
                         
             // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
-            //newVal = continuousFilter(newVal: newVal)
+           // newVal = continuousFilter(arr: newVal)
             
             valuesArr.removeFirst()
             valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            
+            //calls filter
+            valuesArr = continuousFilter(arr: valuesArr)
             
             for i in 0..<numVal {
                 valuesArr[i].x = Double(i)
@@ -157,6 +161,72 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         self.lineChartView.data = data
     }
+    /*
+    @objc func updateChartValues(arr: Array<ChartDataEntry>){
+        if(EKGQueue.isEmpty() == false){
+            var newVal = Double(EKGQueue.pop())
+                        
+            // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
+           // newVal = continuousFilter(arr: newVal)
+            
+            valuesArr.removeFirst()
+            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            
+            valuesArr = continuousFilter(arr: valuesArr)
+            
+            //valuesArr = arr
+            for i in 0..<numVal {
+                valuesArr[i].x = Double(i)
+                valuesArr[i].y = Double(valuesArr[i].y)
+            }
+            
+            
+            
+        }
+        for i in 0...999{
+            if(i<100){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=100 && i<200){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=200 && i<300){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=300 && i<400){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=400 && i<500){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=500 && i<600){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=600 && i<700){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=700 && i<800){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=800 && i<900){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=900 && i<1000){
+                valuesArr[i].y = Double(0)
+            }
+            
+        }
+        
+        valuesArr = continuousFilter(arr: valuesArr)
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
+        let data = LineChartData(dataSet: set1)
+        
+        self.lineChartView.data = data
+    }
+ */
     
     @objc func initChart(){
         
@@ -171,40 +241,31 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         self.lineChartView.data = data
         
     }
-    /*
-    func continuousFilter(newVal: Double) -> Double{
-        //increment time
-        globalFilterTime += 1.0
+    
+    func continuousFilter(arr: Array<ChartDataEntry>) -> Array<ChartDataEntry>{
+        //convert to y-only array for filtering
+        var yArr = Array<Float>(repeating: 0.0, count: 1000)
         
-        //inputs
-        var xOld = (globalFilterTime + 1.0)/115.0
-        var yOld = newVal
-        var xNew = (globalFilterTime)/115.0
-        var yNew = 0.0
+        for i in 0...999 {
+            yArr[i] = Float(arr[i].y)
+        }
         
-        //note: x = dt * array position
-        var dt = 1.0/115.0
-        var cutoff = 50.0
-        var alpha = dt / (dt + 1.0 / (Double.pi * 2 * cutoff))
+        //calls NVDSP library
+        let bandpass : NVBandpassFilter = NVBandpassFilter(samplingRate: 115.0)
+        bandpass.centerFrequency = 19.75
+        bandpass.q = 0.10101010101
+        bandpass.filterData(&yArr, numFrames: 1000, numChannels: 1)
         
-        //lowpass
-        yNew = xNew * alpha + (1 - alpha) * yOld
+        //convert back values
         
-        //highpass
-        yNew = alpha * (yNew + xOld - xNew)
+        for i in 0...999 {
+            arr[i].y = Double(yArr[i])
+        }
         
         
-        /*
-        var xVal = 0.0
-        var yVal = newVal
-        var lowVal = xVal * alpha + (1 - alpha) * yVal
-        var highVal = alpha * (yVal + xVal)
-        */
-        
-        //returns double
-        return yNew
+        return arr
     }
-    */
+    
     /*-------------------------------Bluetooth-------------------------------*/
     
     // Start Scanning for BT devices
