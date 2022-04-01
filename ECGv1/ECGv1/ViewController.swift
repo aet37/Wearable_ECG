@@ -127,7 +127,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
     
     
-    var globalFilterTime = 0.0
+    //var globalFilterTime = 0.0
     
     // Listen for pushed() notification
     
@@ -138,7 +138,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             var newVal = Double(EKGQueue.pop())
                         
             // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
-            newVal = continuousFilter(newVal: newVal)
+            //newVal = continuousFilter(newVal: newVal)
             
             valuesArr.removeFirst()
             valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
@@ -171,7 +171,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         self.lineChartView.data = data
         
     }
-    
+    /*
     func continuousFilter(newVal: Double) -> Double{
         //increment time
         globalFilterTime += 1.0
@@ -204,7 +204,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //returns double
         return yNew
     }
-    
+    */
     /*-------------------------------Bluetooth-------------------------------*/
     
     // Start Scanning for BT devices
