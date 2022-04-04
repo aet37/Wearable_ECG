@@ -152,13 +152,28 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             valuesArr.removeFirst()
             valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
             
-            //calls filter
-            valuesArr = continuousFilter(arr: valuesArr)
+            let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
             
-            for i in 0..<numVal {
+//            let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
+//            print(coeffs);
+            let (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
+            
+            button2.setTitle(String(HR), for: .normal)
+            
+            button3.setTitle(String(leads), for: .normal)
+            
+            for i in 0...polydata.count {
                 valuesArr[i].x = Double(i)
-                valuesArr[i].y = Double(valuesArr[i].y)
+                valuesArr[i].y = Double(polydata[i])
             }
+            
+            //calls filter
+//            valuesArr = continuousFilter(arr: valuesArr)
+            
+//            for i in 0..<numVal {
+//                valuesArr[i].x = Double(i)
+//                valuesArr[i].y = Double(valuesArr[i].y)
+//            }
             
         }
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
@@ -241,14 +256,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         for i in 0..<numVal {
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
         }
-        
-        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
-        
-        let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
-        print(coeffs);
-//        let HR, leads, polydata = AlgHRandLeads(ECG_data: testECGdata);
-        
-//        valuesArr = polydata;
+    
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         let data = LineChartData(dataSet: set1)
