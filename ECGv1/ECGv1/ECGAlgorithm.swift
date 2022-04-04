@@ -19,6 +19,8 @@ func getCSVData(dataFile: String) -> [[Double]] {
     enum CustomError: Error {
         case notAnItOrADouble(String)
     }
+    
+    var returnValue: [[Double]] = [];
 
     do {
         let content = try String(contentsOfFile: dataFile)
@@ -33,17 +35,17 @@ func getCSVData(dataFile: String) -> [[Double]] {
                     return value
                 }
             }
-        return numberRows
+        returnValue = numberRows;
 
     } catch (let error) {
         print(error)
     }
     
-    return [[1,2,3]]
+    return returnValue
 }
 
 /*-------------------------------Mean function-------------------------------*/
-func calculateMean(array: [Int]) -> Double {
+func calculateMean(array: [Double]) -> Double {
     
     // Calculate sum ot items with reduce function
     let sum = array.reduce(0, { a, b in
@@ -84,11 +86,27 @@ func ** (num: Double, power: Double) -> Double{
 //    return zip(a, b).map(*).reduce(0, +);
 //}
 
-public func mtimes(_ A: Matrix, _ B: Matrix) -> Matrix {
-    precondition(A.cols == B.rows, "Matrix dimensions must agree")
-    let C: Matrix = zeros(A.rows, B.cols)
-    vDSP_mmulD(A.flat, 1, B.flat, 1, &(C.flat), 1, vDSP_Length(A.rows), vDSP_Length(B.cols), vDSP_Length(A.cols))
-    return C
+//public func mtimes(_ A: Matrix, _ B: Matrix) -> Matrix {
+//    precondition(A.cols == B.rows, "Matrix dimensions must agree")
+//    let C: Matrix = zeros(A.rows, B.cols)
+//    vDSP_mmulD(A.flat, 1, B.flat, 1, &(C.flat), 1, vDSP_Length(A.rows), vDSP_Length(B.cols), vDSP_Length(A.cols))
+//    return C
+//}
+
+func dotProduct(A: Matrix, B: Matrix) -> Matrix {
+    var output: Matrix = zeros(A.rows, B.cols);
+
+    for i in 0...A.rows - 1 {
+        for j in 0...B.cols - 1 {
+            var tempSum: Double = 0.0;
+            for k in 0...A.cols - 1 {
+                tempSum = tempSum + (A[i,k] * B[k,j]);
+            }
+            output[i,j] = tempSum;
+        }
+    }
+
+    return Matrix(output)
 }
 
 /*-------------------------------Inverse function-------------------------------*/
@@ -107,13 +125,13 @@ public func mtimes(_ A: Matrix, _ B: Matrix) -> Matrix {
 //}
 
 /*-------------------------------Predict y given x-------------------------------*/
-func predict(x: Int, coefficients: [Int]) -> Int{
+func predict(x: Double, coefficients: [Double]) -> Double{
 
-    var prediction = 0
+    var prediction = 1.1
 
     for i in 0...coefficients.count {
 
-        prediction += coefficients[i] * Int((Double(x)**Double(i)));
+        prediction += coefficients[i] * (x**Double(i));
 
   }
 
@@ -132,45 +150,60 @@ func predict(x: Int, coefficients: [Int]) -> Int{
 //reading test data from CSV file
 let testECGdata = getCSVData(dataFile: "./data1.csv");
 
-public func polynomialFit(samples: Int, values: [[Double]], order: Int) -> Matrix {
+public func polynomialFit(samples: Int, values: [[Double]], order: Int) -> [Double] {
     
     var xMatrix: [[Double]] = [];
     
     let yMatrix = transpose(Matrix(values));
+    
+    print("samples: \(samples)")
+    
+    print("yMatrix size: (\(yMatrix.rows), \(yMatrix.cols))")
 
-    for i in 0...samples {
+    for i in 0...samples - 1 {
 
-        var temp: [[Double]] = [];
+        var temp: [Double] = [];
 
         for j in 0...order  {
             
-            let powTemp = Double(Int(i))**Double(j);
+            let powTemp = pow(Double(i),Double(order - j));
             
-            temp.append([powTemp]);
+            temp.append(powTemp);
 
         }
 
-        xMatrix.append(contentsOf: temp);
+        xMatrix.append(temp);
 
     }
 
     let xMatrixT = transpose(Matrix(xMatrix));
+    
+    print("xMatrix size: (\(Matrix(xMatrix).rows), \(Matrix(xMatrix).cols))")
+    print("xMatrixT size: (\(xMatrixT.rows), \(xMatrixT.cols))")
 
-//    let dot1 = Matrix(xMatrixT)°Matrix(yMatrix);
-//    let dot2 = Matrix(xMatrixT)°Matrix(yMatrix);
-    let dot1 = mtimes(xMatrixT, Matrix(xMatrix));
-    let dot2 = mtimes(xMatrixT, yMatrix);
+    let dot1 = dotProduct(A: xMatrixT, B: Matrix(xMatrix));
+    let dot2 = dotProduct(A: xMatrixT, B: yMatrix);
+    
     let dotInv = inv(dot1);
+    
+    
+    print("dot1 size: (\(dot1.rows), \(dot1.cols))")
+    print("dot2 size: (\(dot2.rows), \(dot2.cols))")
+    
+    print("dotInv size: (\(dotInv.rows), \(dotInv.cols))")
 
-    let coefficients = mtimes(dotInv, dot2);
-
-    print(coefficients);
-    return coefficients;
+    let Matcoefficients = dotProduct(A: dotInv, B: dot2);
+    
+    var coeffs: [Double] = [];
+    for i in 0...Matcoefficients.rows - 1 {
+        coeffs.append(Matcoefficients[i]);
+    }
+    return coeffs;
 
 }
 
 
-func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Int]) {
+func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     //init return vars
     var heartRate = 0.1;
     var leadsFlipped = false;
@@ -180,56 +213,60 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Int]) {
 
     //fitting the data and detrending it
     let pol_order = 9;
-    let coeffs = polynomialFit(samples: t, values: ECG_data, order: 9);
-//    var f_y.push()
+    let coeffs = polynomialFit(samples: t, values: ECG_data, order: pol_order);
     
-//    var ECG_detrend = ECG_data - f_y;
-//
-//    //Find local maxima which corresponds to top of the QRS complex
-//    let highest_values : [Double] = []
-//    let highest_index : [Double] = []
-//    for i in ECG_detrend.count {
-//        var max_val = max(ECG_detrend)
-//        var mean_val = calculateMean(array: ECG_detrend)
-//
-//        if (ECG_detrend[i] >= (max_val + mean_val)/2) {
-//            highest_values.insert(ECG_detrend[i])
-//            highest_index.insert(i)
-//        }
-//
-//    }
-//
-//    //Find local minima which corresponds to top of the QRS complex if flipped
-//    var modified_detrend = -ECG_detrend;
-//
-//    var lowest_values : [Double] = []
-//    var lowest_index : [Double] = []
-//    for i in modified_detrend.count {
-//        let max_val = max(modified_detrend)
-//        let mean_val = calculateMean(array: modified_detrend)
-//
-//        if (modified_detrend[i] >= (max_val + mean_val)/2) {
-//            lowest_values.insert(ECG_detrend[i])
-//            lowest_index.insert(i)
-//        }
-//
-//    }
-//
-//    let avg_highest_value = calculateMean(array: highest_values);
-//    let avg_lowest_value = calculateMean(array: lowest_values);
-//
-//
-//    if (avg_lowest_value > avg_highest_value) {
-//        leadsFlipped = true;
-//        heartRate = 0;
-//    }
-//    else {
-//        leadsFlipped = false;
-////            r_index = find(highest_values);
-//        heartRate = highest_values.count * 6.0;
-//    }
-//
-//    return (heartRate, leadsFlipped, polyfitData)
-    
-    return (70, true, [1,2])
+    var f_y: [Double] = [];
+    for i in 0...t-1 {
+        let newVal = predict(x: ECG_data[0][i], coefficients: coeffs);
+
+        f_y.append(newVal);
+    }
+
+    let ECG_detrend: [Double] = ECG_data[0] - f_y;
+
+    //Find local maxima which corresponds to top of the QRS complex
+    var highest_values : [Double] = []
+    var highest_index : [Double] = []
+    for i in 0...ECG_detrend.count - 1 {
+        let max_val = max(ECG_detrend)
+        let mean_val = calculateMean(array: ECG_detrend)
+
+        if (ECG_detrend[i] >= (max_val + mean_val)/2) {
+            highest_values.append(ECG_detrend[i])
+            highest_index.append(Double(i))
+        }
+
+    }
+
+    //Find local minima which corresponds to top of the QRS complex if flipped
+    let modified_detrend = -ECG_detrend;
+
+    var lowest_values : [Double] = []
+    var lowest_index : [Double] = []
+    for i in 0...modified_detrend.count - 1 {
+        let max_val = max(modified_detrend)
+        let mean_val = calculateMean(array: modified_detrend)
+
+        if (modified_detrend[i] >= (max_val + mean_val)/2) {
+            lowest_values.append(ECG_detrend[i])
+            lowest_index.append(Double(i))
+        }
+
+    }
+
+    let avg_highest_value = calculateMean(array: highest_values);
+    let avg_lowest_value = calculateMean(array: lowest_values);
+
+
+    if (avg_lowest_value > avg_highest_value) {
+        leadsFlipped = true;
+        heartRate = 0;
+    }
+    else {
+        leadsFlipped = false;
+//            r_index = find(highest_values);
+        heartRate = Double(highest_values.count) * 6.0;
+    }
+
+    return (heartRate, leadsFlipped, ECG_detrend)
 }

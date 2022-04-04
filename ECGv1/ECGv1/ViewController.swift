@@ -141,10 +141,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     @objc func setChartValues(){
         setValues()
         
-        let testECGdata = getCSVData(dataFile: "./data1.csv");
+        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
         
-        
-        let coeffs = polynomialFit(samples: testECGdata.count, values: testECGdata, order: 9);
+        let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
         print(coeffs);
 //        let HR, leads, polydata = AlgHRandLeads(ECG_data: testECGdata);
         

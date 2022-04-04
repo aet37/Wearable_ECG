@@ -18,7 +18,7 @@
 		561471B827C4ECD8007D7F64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561471B627C4ECD8007D7F64 /* LaunchScreen.storyboard */; };
 		561471C327C4ECD9007D7F64 /* ECGv1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471C227C4ECD9007D7F64 /* ECGv1Tests.swift */; };
 		561471CE27C4ECD9007D7F64 /* ECGv1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471CD27C4ECD9007D7F64 /* ECGv1UITests.swift */; };
-		6C87012D27E1534200D32705 /* data1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6C87012C27E1534200D32705 /* data1.txt */; };
+		6C87012D27E1534200D32705 /* data1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6C87012C27E1534200D32705 /* data1.csv */; };
 		6C870CC627E2539B00D32705 /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 6C870CC527E2539B00D32705 /* Numerics */; };
 		6C870CC827EB8EFB00D32705 /* ECGAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C870CC727EB8EFB00D32705 /* ECGAlgorithm.swift */; };
 		6C870CCB27EE656000D32705 /* SwiftMatrix in Frameworks */ = {isa = PBXBuildFile; productRef = 6C870CCA27EE656000D32705 /* SwiftMatrix */; };
@@ -67,7 +67,7 @@
 		561471CF27C4ECD9007D7F64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62B3A9072B6197CC3C493922 /* Pods_ECGv1_ECGv1UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECGv1_ECGv1UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A03ACCBA4C02B3B1C390871 /* Pods-ECGv1-ECGv1UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1-ECGv1UITests.release.xcconfig"; path = "Target Support Files/Pods-ECGv1-ECGv1UITests/Pods-ECGv1-ECGv1UITests.release.xcconfig"; sourceTree = "<group>"; };
-		6C87012C27E1534200D32705 /* data1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data1.txt; sourceTree = "<group>"; };
+		6C87012C27E1534200D32705 /* data1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data1.csv; sourceTree = "<group>"; };
 		6C870CC727EB8EFB00D32705 /* ECGAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGAlgorithm.swift; sourceTree = "<group>"; };
 		7EA53C8CDFD6FE8A52DB2C49 /* Pods-ECGv1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1Tests.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1Tests/Pods-ECGv1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		84629BB93B54C69EAAF0B36A /* Pods-ECGv1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 		561471AA27C4ECD7007D7F64 /* ECGv1 */ = {
 			isa = PBXGroup;
 			children = (
-				6C87012C27E1534200D32705 /* data1.txt */,
+				6C87012C27E1534200D32705 /* data1.csv */,
 				49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */,
 				561471AB27C4ECD7007D7F64 /* AppDelegate.swift */,
 				561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */,
@@ -306,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				561471B827C4ECD8007D7F64 /* LaunchScreen.storyboard in Resources */,
-				6C87012D27E1534200D32705 /* data1.txt in Resources */,
+				6C87012D27E1534200D32705 /* data1.csv in Resources */,
 				561471B527C4ECD8007D7F64 /* Assets.xcassets in Resources */,
 				561471B327C4ECD7007D7F64 /* Main.storyboard in Resources */,
 			);
