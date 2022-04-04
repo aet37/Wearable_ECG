@@ -2,17 +2,25 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
+  - Novocaine (0.0.1)
+  - NVDSP (0.0.1):
+    - Novocaine
 
 DEPENDENCIES:
-  - Charts
+  - Charts (~> 3.6.0)
+  - NVDSP (~> 0.0.1)
 
 SPEC REPOS:
   trunk:
     - Charts
+    - Novocaine
+    - NVDSP
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Novocaine: 07991e1643369e8b660f361f87f88c797d99a53f
+  NVDSP: 25d806aeeaf3ed915f00085909abe7768cb48239
 
-PODFILE CHECKSUM: 8864fa7782d7729e2cafe595a4b01705117d08cb
+PODFILE CHECKSUM: eee8a1d5ca101050d5c296f08022af0d492416df
 
 COCOAPODS: 1.11.2

@@ -16,6 +16,8 @@ import Charts
 import Numerics
 import Foundation
 import Accelerate
+import NVDSP
+
 
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
     
@@ -23,7 +25,14 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
     private var arduCh: CBCharacteristic?
-    var EKGQueue = BTQueue()
+
+    
+    // For reciving values from BT
+    var b1 = UInt16(0)
+    var b2 = UInt16(0)
+    var recieved = UInt16(0)
+    
+    var EKGQueue = BTQueue() //devliery queue
     
     /*-------------------------------Bluetooth Start Transmission Switche-------------------------------*/
     @IBOutlet weak var startSwitch: UISwitch!
@@ -93,10 +102,10 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 //        button2.setTitle(String(str), for: .normal)
         view.addSubview(button3)
         
-        setChartValues()
-        
-        //currently set for 250 hz, timeInterval is in ms
-        _ = Timer.scheduledTimer(timeInterval: 0.04, target:self, selector: #selector(self.setChartValues), userInfo: nil, repeats: true)
+        initChart()
+   
+        // Notification to call chart updater every time something is recived in queue
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -118,28 +127,120 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     }
     
     
+    
+    
     /*-------------------------------Chart Values-------------------------------*/
     
-    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1200)
+    let numVal = 1000
     
-    @objc func setValues(){
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
+    
+    
+    //var globalFilterTime = 0.0
+    
+    // Listen for pushed() notification
+    
+    
+    //new chart updater
+    @objc func updateChartValues(notification: NSNotification){
+        if(EKGQueue.isEmpty() == false){
+            var newVal = Double(EKGQueue.pop())
+                        
+            // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
+           // newVal = continuousFilter(arr: newVal)
+            
+            valuesArr.removeFirst()
+            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            
+            //calls filter
+            valuesArr = continuousFilter(arr: valuesArr)
+            
+            for i in 0..<numVal {
+                valuesArr[i].x = Double(i)
+                valuesArr[i].y = Double(valuesArr[i].y)
+            }
+            
+        }
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
+        let data = LineChartData(dataSet: set1)
         
-        //This loop demonstrates functionality, comment out when you have our input connected
-        for i in 0..<1200 {
-            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(arc4random_uniform(UInt32(20)) + 3))
+        self.lineChartView.data = data
+    }
+    /*
+    @objc func updateChartValues(arr: Array<ChartDataEntry>){
+        if(EKGQueue.isEmpty() == false){
+            var newVal = Double(EKGQueue.pop())
+                        
+            // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
+           // newVal = continuousFilter(arr: newVal)
+            
+            valuesArr.removeFirst()
+            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            
+            valuesArr = continuousFilter(arr: valuesArr)
+            
+            //valuesArr = arr
+            for i in 0..<numVal {
+                valuesArr[i].x = Double(i)
+                valuesArr[i].y = Double(valuesArr[i].y)
+            }
+            
+            
+            
+        }
+        for i in 0...999{
+            if(i<100){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=100 && i<200){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=200 && i<300){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=300 && i<400){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=400 && i<500){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=500 && i<600){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=600 && i<700){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=700 && i<800){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=800 && i<900){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=900 && i<1000){
+                valuesArr[i].y = Double(0)
+            }
+            
         }
         
-        //This will add our data to the graph
-        /*
-        var newVal = /*NEWVALUE*/ //should be a number
-        let first1 = valuesArr.removeFirst()
-        valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal))
-        */
+        valuesArr = continuousFilter(arr: valuesArr)
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
+        let data = LineChartData(dataSet: set1)
         
+        self.lineChartView.data = data
     }
+ */
     
-    @objc func setChartValues(){
-        setValues()
+    @objc func initChart(){
+        
+        for i in 0..<numVal {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
+        }
         
         let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
         
@@ -148,13 +249,36 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 //        let HR, leads, polydata = AlgHRandLeads(ECG_data: testECGdata);
         
 //        valuesArr = polydata;
-        
-        let set1 = LineChartDataSet(entries: valuesArr, label: "dataset 1")
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         let data = LineChartData(dataSet: set1)
         
         self.lineChartView.data = data
         
+    }
+    
+    func continuousFilter(arr: Array<ChartDataEntry>) -> Array<ChartDataEntry>{
+        //convert to y-only array for filtering
+        var yArr = Array<Float>(repeating: 0.0, count: 1000)
+        
+        for i in 0...999 {
+            yArr[i] = Float(arr[i].y)
+        }
+        
+        //calls NVDSP library
+        let bandpass : NVBandpassFilter = NVBandpassFilter(samplingRate: 115.0)
+        bandpass.centerFrequency = 19.75
+        bandpass.q = 0.10101010101
+        bandpass.filterData(&yArr, numFrames: 1000, numChannels: 1)
+        
+        //convert back values
+        
+        for i in 0...999 {
+            arr[i].y = Double(yArr[i])
+        }
+        
+        
+        return arr
     }
     
     /*-------------------------------Bluetooth-------------------------------*/
@@ -230,16 +354,18 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     //
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        // Get value recived as 2 seperate bytes
-        let b1 = UInt16(characteristic.value![0])
-        let b2 = UInt16(characteristic.value![1])
-        
-        // Insert b1 and b2 in recieved integer
-        var recieved = UInt16(0)
-        recieved = (b1 << 8) | b2
-        
-        // Push the recived value onto the queue
-        EKGQueue.push(val: recieved, periph: peripheral, charach: characteristic)
+        for i in 0..<(characteristic.value!.count)/2 {
+            
+            // Get value recived as 2 seperate bytes
+            b1 = UInt16(characteristic.value![i*2])
+            b2 = UInt16(characteristic.value![(i*2) + 1])
+            
+            // Insert b1 and b2 in recieved integer
+            recieved = (b1 << 8) | b2
+            
+            // Push the recived value onto the queue
+            EKGQueue.push(val: recieved, periph: peripheral, charach: characteristic)
+            }
         }
 
     // Handle Disconnect

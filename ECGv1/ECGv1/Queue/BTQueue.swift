@@ -17,7 +17,7 @@ class BTQueue {
     func push(val: UInt16, periph: CBPeripheral, charach: CBCharacteristic) {
         
         // Make sure the phone memory does not overfill if app is not handling data
-        if(valuesArr.count >= 1200) {
+        if(valuesArr.count >= 10000) {
             print("Queue Limit Reached")    // Debug log
             
             // Disable Send to BT
@@ -30,8 +30,11 @@ class BTQueue {
             // Add value to queue
             valuesArr.append(val)
             
+            // Should alert view controller every time push method is called
+            NotificationCenter.default.post(name: Notification.Name("push"), object: nil)
+            
             //print("Recived", val)   // Debug log
-            print(valuesArr.count)
+            //print("R")
         }
     }
     
@@ -46,5 +49,15 @@ class BTQueue {
         
         // Return the popped value
         return to_return
+    }
+    
+    func isEmpty() -> Bool {
+        let len = valuesArr.count
+        if (len == 0){
+            return true
+        }
+        else{
+            return false
+        }
     }
 }
