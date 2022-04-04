@@ -13,6 +13,9 @@
 import UIKit
 import CoreBluetooth
 import Charts
+import Numerics
+import Foundation
+import Accelerate
 import NVDSP
 
 
@@ -79,6 +82,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         return button3
     }()
     
+//    @IBOutlet weak var Addtest: UILabel!
     
     /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
@@ -91,7 +95,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
         
+        
+        
         view.addSubview(button2)
+//        var str = heartRate.pointee
+//        button2.setTitle(String(str), for: .normal)
         view.addSubview(button3)
         
         initChart()
@@ -234,6 +242,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
         }
         
+        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
+        
+        let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
+        print(coeffs);
+//        let HR, leads, polydata = AlgHRandLeads(ECG_data: testECGdata);
+        
+//        valuesArr = polydata;
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         let data = LineChartData(dataSet: set1)
@@ -369,4 +384,5 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         print("Central scanning for", ArduPeripheral.ArduUUID);
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
     }
+    
 }
