@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,11 @@
 		561471B827C4ECD8007D7F64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 561471B627C4ECD8007D7F64 /* LaunchScreen.storyboard */; };
 		561471C327C4ECD9007D7F64 /* ECGv1Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471C227C4ECD9007D7F64 /* ECGv1Tests.swift */; };
 		561471CE27C4ECD9007D7F64 /* ECGv1UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561471CD27C4ECD9007D7F64 /* ECGv1UITests.swift */; };
+		6C87012D27E1534200D32705 /* data1.csv in Resources */ = {isa = PBXBuildFile; fileRef = 6C87012C27E1534200D32705 /* data1.csv */; };
+		6C870CC627E2539B00D32705 /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 6C870CC527E2539B00D32705 /* Numerics */; };
+		6C870CC827EB8EFB00D32705 /* ECGAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C870CC727EB8EFB00D32705 /* ECGAlgorithm.swift */; };
+		6C870CCB27EE656000D32705 /* SwiftMatrix in Frameworks */ = {isa = PBXBuildFile; productRef = 6C870CCA27EE656000D32705 /* SwiftMatrix */; };
+		6C870CCE27EFB43D00D32705 /* LASwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6C870CCD27EFB43D00D32705 /* LASwift */; };
 		B4660F917D194A119A79789F /* Pods_ECGv1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3428C7F7C71F8295C1AB6D19 /* Pods_ECGv1.framework */; };
 		BC9260EAEBE7637607E80C3E /* Pods_ECGv1_ECGv1UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B3A9072B6197CC3C493922 /* Pods_ECGv1_ECGv1UITests.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +67,8 @@
 		561471CF27C4ECD9007D7F64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62B3A9072B6197CC3C493922 /* Pods_ECGv1_ECGv1UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECGv1_ECGv1UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A03ACCBA4C02B3B1C390871 /* Pods-ECGv1-ECGv1UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1-ECGv1UITests.release.xcconfig"; path = "Target Support Files/Pods-ECGv1-ECGv1UITests/Pods-ECGv1-ECGv1UITests.release.xcconfig"; sourceTree = "<group>"; };
+		6C87012C27E1534200D32705 /* data1.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data1.csv; sourceTree = "<group>"; };
+		6C870CC727EB8EFB00D32705 /* ECGAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECGAlgorithm.swift; sourceTree = "<group>"; };
 		7EA53C8CDFD6FE8A52DB2C49 /* Pods-ECGv1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1Tests.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1Tests/Pods-ECGv1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		84629BB93B54C69EAAF0B36A /* Pods-ECGv1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.debug.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.debug.xcconfig"; sourceTree = "<group>"; };
 		E50356C736A02481892EE6D4 /* Pods-ECGv1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECGv1.release.xcconfig"; path = "Target Support Files/Pods-ECGv1/Pods-ECGv1.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C870CC627E2539B00D32705 /* Numerics in Frameworks */,
+				6C870CCE27EFB43D00D32705 /* LASwift in Frameworks */,
+				6C870CCB27EE656000D32705 /* SwiftMatrix in Frameworks */,
 				B4660F917D194A119A79789F /* Pods_ECGv1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,6 +130,7 @@
 		561471AA27C4ECD7007D7F64 /* ECGv1 */ = {
 			isa = PBXGroup;
 			children = (
+				6C87012C27E1534200D32705 /* data1.csv */,
 				49E42E8127C5144600FB6DBB /* ArduPeripheral.swift */,
 				561471AB27C4ECD7007D7F64 /* AppDelegate.swift */,
 				561471AD27C4ECD7007D7F64 /* SceneDelegate.swift */,
@@ -129,6 +140,7 @@
 				561471B627C4ECD8007D7F64 /* LaunchScreen.storyboard */,
 				561471B927C4ECD8007D7F64 /* Info.plist */,
 				49EB944727C6C3C20010F366 /* BTQueue.swift */,
+				6C870CC727EB8EFB00D32705 /* ECGAlgorithm.swift */,
 			);
 			path = ECGv1;
 			sourceTree = "<group>";
@@ -192,6 +204,11 @@
 			dependencies = (
 			);
 			name = ECGv1;
+			packageProductDependencies = (
+				6C870CC527E2539B00D32705 /* Numerics */,
+				6C870CCA27EE656000D32705 /* SwiftMatrix */,
+				6C870CCD27EFB43D00D32705 /* LASwift */,
+			);
 			productName = ECGv1;
 			productReference = 561471A827C4ECD7007D7F64 /* ECGv1.app */;
 			productType = "com.apple.product-type.application";
@@ -246,6 +263,7 @@
 				TargetAttributes = {
 					561471A727C4ECD7007D7F64 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1320;
 					};
 					561471BD27C4ECD9007D7F64 = {
 						CreatedOnToolsVersion = 12.4;
@@ -266,6 +284,11 @@
 				Base,
 			);
 			mainGroup = 5614719F27C4ECD7007D7F64;
+			packageReferences = (
+				6C870CC427E2539B00D32705 /* XCRemoteSwiftPackageReference "swift-numerics" */,
+				6C870CC927EE656000D32705 /* XCRemoteSwiftPackageReference "SwiftMatrix" */,
+				6C870CCC27EFB43D00D32705 /* XCRemoteSwiftPackageReference "LASwift" */,
+			);
 			productRefGroup = 561471A927C4ECD7007D7F64 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -283,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				561471B827C4ECD8007D7F64 /* LaunchScreen.storyboard in Resources */,
+				6C87012D27E1534200D32705 /* data1.csv in Resources */,
 				561471B527C4ECD8007D7F64 /* Assets.xcassets in Resources */,
 				561471B327C4ECD7007D7F64 /* Main.storyboard in Resources */,
 			);
@@ -416,6 +440,7 @@
 				561471AC27C4ECD7007D7F64 /* AppDelegate.swift in Sources */,
 				561471AE27C4ECD7007D7F64 /* SceneDelegate.swift in Sources */,
 				49EB944827C6C3C20010F366 /* BTQueue.swift in Sources */,
+				6C870CC827EB8EFB00D32705 /* ECGAlgorithm.swift in Sources */,
 				49E42E8227C5144700FB6DBB /* ArduPeripheral.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,15 +618,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K4GUD8H29N;
+				DEVELOPMENT_TEAM = N95H4RJH73;
 				INFOPLIST_FILE = ECGv1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bobbyrouse.ECGv1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -613,15 +642,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K4GUD8H29N;
+				DEVELOPMENT_TEAM = N95H4RJH73;
 				INFOPLIST_FILE = ECGv1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bobbyrouse.ECGv1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -751,6 +783,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6C870CC427E2539B00D32705 /* XCRemoteSwiftPackageReference "swift-numerics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-numerics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		6C870CC927EE656000D32705 /* XCRemoteSwiftPackageReference "SwiftMatrix" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/theolternative/SwiftMatrix";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		6C870CCC27EFB43D00D32705 /* XCRemoteSwiftPackageReference "LASwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AlexanderTar/LASwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6C870CC527E2539B00D32705 /* Numerics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6C870CC427E2539B00D32705 /* XCRemoteSwiftPackageReference "swift-numerics" */;
+			productName = Numerics;
+		};
+		6C870CCA27EE656000D32705 /* SwiftMatrix */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6C870CC927EE656000D32705 /* XCRemoteSwiftPackageReference "SwiftMatrix" */;
+			productName = SwiftMatrix;
+		};
+		6C870CCD27EFB43D00D32705 /* LASwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6C870CCC27EFB43D00D32705 /* XCRemoteSwiftPackageReference "LASwift" */;
+			productName = LASwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 561471A027C4ECD7007D7F64 /* Project object */;
 }
