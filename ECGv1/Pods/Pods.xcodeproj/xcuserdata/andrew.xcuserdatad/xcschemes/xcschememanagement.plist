@@ -11,6 +11,16 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>NVDSP.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Novocaine.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods-ECGv1-ECGv1UITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
