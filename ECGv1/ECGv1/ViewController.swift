@@ -105,7 +105,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         initChart()
    
         // Notification to call chart updater every time something is recived in queue
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
+        
+        _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -142,31 +144,32 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     
     //new chart updater
-    @objc func updateChartValues(notification: NSNotification){
-        if(EKGQueue.isEmpty() == false){
-            var newVal = Double(EKGQueue.pop())
-                        
-            // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
-           // newVal = continuousFilter(arr: newVal)
-            
-            valuesArr.removeFirst()
-            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
-            
-            let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
-            
+   // @objc func updateChartValues(notification: NSNotification){
+    @objc func updateChartValues(){
+       // if(EKGQueue.isEmpty() == false){
+       // var newVal = Double(EKGQueue.pop())
+                    
+        // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
+       // newVal = continuousFilter(arr: newVal)
+        
+       // valuesArr.removeFirst()
+        //valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+        
+        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
+        
 //            let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
 //            print(coeffs);
-            let (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
-            
-            button2.setTitle(String(HR), for: .normal)
-            
-            button3.setTitle(String(leads), for: .normal)
-            
-            for i in 0...polydata.count {
-                valuesArr[i].x = Double(i)
-                valuesArr[i].y = Double(polydata[i])
-            }
-            
+        let (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
+        
+        button2.setTitle(String(HR), for: .normal)
+        
+        button3.setTitle(String(leads), for: .normal)
+        
+        for i in 0...polydata.count {
+            valuesArr[i].x = Double(i)
+            valuesArr[i].y = Double(polydata[i])
+        }
+        
             //calls filter
 //            valuesArr = continuousFilter(arr: valuesArr)
             
@@ -175,7 +178,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 //                valuesArr[i].y = Double(valuesArr[i].y)
 //            }
             
-        }
+        //}
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         set1.drawValuesEnabled = false
