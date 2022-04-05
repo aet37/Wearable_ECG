@@ -267,6 +267,9 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
 //            r_index = find(highest_values);
         heartRate = Double(highest_values.count) * 6.0;
     }
+    
+    print("heart rate: \(heartRate)")
+    print("leads: \(leadsFlipped)")
 
     return (heartRate, leadsFlipped, ECG_detrend)
 }
