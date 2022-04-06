@@ -180,6 +180,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
                 valuesArr[i].y = Double(valuesArr[i].y)
             }
             
+            //filtering
+            var currVal = valuesArr[0].y
+            for i in 0...999{
+                currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+                valuesArr[i].y = currVal
+            }
+            
         }
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
