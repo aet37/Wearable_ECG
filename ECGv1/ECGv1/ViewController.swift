@@ -102,9 +102,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         
         view.addSubview(button2)
-//        var str = heartRate.pointee
-//        button2.setTitle(String(str), for: .normal)
         view.addSubview(button3)
+        self.lineChartView.leftAxis.axisMinimum = 0
+        self.lineChartView.rightAxis.axisMinimum = 0
         
         initChart()
    
