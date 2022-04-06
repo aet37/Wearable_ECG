@@ -76,10 +76,10 @@ public func transpose(_ A: Matrix) -> Matrix {
 }
 
 /*-------------------------------Overwriting Power Operator-------------------------------*/
-infix operator ** : MultiplicationPrecedence
-func ** (num: Double, power: Double) -> Double{
-    return pow(num, power);
-}
+//infix operator ** : MultiplicationPrecedence
+//func ** (num: Double, power: Double) -> Double{
+//    return pow(num, power);
+//}
 
 /*-------------------------------Dot Product function-------------------------------*/
 //func dot(a: [Float], b: [Float]) -> Float {
@@ -129,9 +129,9 @@ func predict(x: Double, coefficients: [Double]) -> Double{
 
     var prediction = 1.1
 
-    for i in 0...coefficients.count {
+    for i in 0...coefficients.count - 1 {
 
-        prediction += coefficients[i] * (x**Double(i));
+        prediction += coefficients[i] * (pow(x,Double(i)));
 
   }
 
@@ -141,15 +141,6 @@ func predict(x: Double, coefficients: [Double]) -> Double{
 
 
 /*-------------------------------Algorithm-------------------------------*/
-//    let ECG_data = [100,200]
-//    let heartRate = UnsafeMutablePointer<Double>.allocate(capacity: 1)
-//    heartRate.initialize(to: 0.1)
-//    let leadsFlipped = UnsafeMutablePointer<Bool>.allocate(capacity: 2)
-//    leadsFlipped.initialize(to: false)
-
-//reading test data from CSV file
-let testECGdata = getCSVData(dataFile: "./data1.csv");
-
 public func polynomialFit(samples: Int, values: [[Double]], order: Int) -> [Double] {
     
     var xMatrix: [[Double]] = [];
@@ -166,7 +157,7 @@ public func polynomialFit(samples: Int, values: [[Double]], order: Int) -> [Doub
 
         for j in 0...order  {
             
-            let powTemp = pow(Double(i),Double(order - j));
+            let powTemp: Double = pow(Double(i),Double(order - j));
             
             temp.append(powTemp);
 
@@ -209,33 +200,54 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     var leadsFlipped = false;
 
     //getting the length of the array
-    let t = ECG_data.count;
+    let t = ECG_data[0].count;
 
     //fitting the data and detrending it
-    let pol_order = 9;
-    let coeffs = polynomialFit(samples: t, values: ECG_data, order: pol_order);
+//    let pol_order = 9;
+//    let coeffs = polynomialFit(samples: t, values: ECG_data, order: pol_order);
+//
+//    var f_y: [Double] = [];
+//    for i in 0...t-1 {
+//        let newVal = predict(x: ECG_data[0][i], coefficients: coeffs);
+//
+//        f_y.append(newVal);
+//    }
+//
+//    let ECG_detrend: [Double] = ECG_data[0] - f_y;
+    let ECG_detrend: [Double] = ECG_data[0];
+
+    //Find local maxima which corresponds to top of the QRS complex
+//    var highest_values : [Double] = []
+//    var highest_index : [Double] = []
+//    for i in 0...ECG_detrend.count - 1 {
+//        let max_val = max(ECG_detrend)
+//        let mean_val = calculateMean(array: ECG_detrend)
+//
+//        if (ECG_detrend[i] >= (max_val + mean_val)/2) {
+//            highest_values.append(ECG_detrend[i])
+//            highest_index.append(Double(i))
+//        }
+//
+//    }
     
-    var f_y: [Double] = [];
-    for i in 0...t-1 {
-        let newVal = predict(x: ECG_data[0][i], coefficients: coeffs);
-
-        f_y.append(newVal);
-    }
-
-    let ECG_detrend: [Double] = ECG_data[0] - f_y;
-
+    //FOR CHECKOFF 2 SINCE BLUETOOTH BROKE
     //Find local maxima which corresponds to top of the QRS complex
     var highest_values : [Double] = []
     var highest_index : [Double] = []
-    for i in 0...ECG_detrend.count - 1 {
-        let max_val = max(ECG_detrend)
-        let mean_val = calculateMean(array: ECG_detrend)
-
-        if (ECG_detrend[i] >= (max_val + mean_val)/2) {
-            highest_values.append(ECG_detrend[i])
-            highest_index.append(Double(i))
+    
+    var inc = 1
+    while (inc < 3600) {
+        if (ECG_detrend[inc] >= 1100) {
+            highest_values.append(ECG_detrend[inc])
+            highest_index.append(Double(inc))
+            
+            if (inc < ECG_detrend.count - 1 - 50) {
+                inc += 50
+            } else {
+                inc = 3599
+            }
         }
-
+        inc += 1
     }
 
     //Find local minima which corresponds to top of the QRS complex if flipped
@@ -243,16 +255,16 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
 
     var lowest_values : [Double] = []
     var lowest_index : [Double] = []
-    for i in 0...modified_detrend.count - 1 {
-        let max_val = max(modified_detrend)
-        let mean_val = calculateMean(array: modified_detrend)
-
-        if (modified_detrend[i] >= (max_val + mean_val)/2) {
-            lowest_values.append(ECG_detrend[i])
-            lowest_index.append(Double(i))
-        }
-
-    }
+//    for i in 0...modified_detrend.count - 1 {
+//        let max_val = max(modified_detrend)
+//        let mean_val = calculateMean(array: modified_detrend)
+//
+//        if (modified_detrend[i] >= (max_val + mean_val)/2) {
+//            lowest_values.append(ECG_detrend[i])
+//            lowest_index.append(Double(i))
+//        }
+//
+//    }
 
     let avg_highest_value = calculateMean(array: highest_values);
     let avg_lowest_value = calculateMean(array: lowest_values);
@@ -268,8 +280,9 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
         heartRate = Double(highest_values.count) * 6.0;
     }
     
-    print("heart rate: \(heartRate)")
-    print("leads: \(leadsFlipped)")
+//    print("r peaks count: \(highest_values.count)")
+//    print("heart rate: \(heartRate)")
+//    print("leads: \(leadsFlipped)")
 
     return (heartRate, leadsFlipped, ECG_detrend)
 }

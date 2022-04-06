@@ -133,9 +133,17 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     /*-------------------------------Chart Values-------------------------------*/
     
-    let numVal = 1000
+    let numVal = 3600
     
-    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 3600)
+    
+    //used to cycle through the test data
+    var incrementECGdata = 2;
+    var currentECGdata = 1;
+    var addpoint = 0
+    var HR: Double = 1.1
+    var leads = false
+    var polydata: [Double] = []
     
     
     //var globalFilterTime = 0.0
@@ -154,21 +162,54 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
        // valuesArr.removeFirst()
         //valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
-        
-        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
+        var testECGdata : [[Double]] = []
+        if (currentECGdata != incrementECGdata) {
+            testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data\(incrementECGdata).csv");
+            (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
+            
+            button2.setTitle(String(HR), for: .normal)
+            
+            if (leads == false) {
+                button3.setTitle("Ok", for: .normal)
+            } else {
+                button3.setTitle("Flipped", for: .normal)
+            }
+        } else {
+            currentECGdata = incrementECGdata
+        }
         
 //            let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
 //            print(coeffs);
-        let (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
         
-        button2.setTitle(String(HR), for: .normal)
         
-        button3.setTitle(String(leads), for: .normal)
-        
-        for i in 0...polydata.count {
-            valuesArr[i].x = Double(i)
-            valuesArr[i].y = Double(polydata[i])
+        if (incrementECGdata == 10 && addpoint >= 3599) {
+            incrementECGdata = 1;
+        } else if (addpoint >= 3599) {
+            incrementECGdata += 1;
         }
+        
+        if(addpoint >= 3600) {
+            addpoint = 0;
+        }
+        
+        
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.append(ChartDataEntry(x: Double(3597), y: Double(testECGdata[0][addpoint])));
+        valuesArr.append(ChartDataEntry(x: Double(3598), y: Double(testECGdata[0][addpoint + 1])));
+        valuesArr.append(ChartDataEntry(x: Double(3599), y: Double(testECGdata[0][addpoint + 2])));
+        
+        for i in 0...3599{
+            valuesArr[i].x = Double(i)
+        }
+        
+        addpoint += 3
+        
+//        for i in 0...polydata.count-1 {
+//            valuesArr[i].x = Double(i)
+//            valuesArr[i].y = Double(polydata[i])
+//        }
         
             //calls filter
 //            valuesArr = continuousFilter(arr: valuesArr)
@@ -256,13 +297,23 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     @objc func initChart(){
         
-        for i in 0..<numVal {
-            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
+//        for i in 0..<numVal {
+//            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
+//        }
+        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
+        
+        for i in 0...testECGdata[0].count - 1 {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: testECGdata[0][i])
         }
+        
     
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
+        
         let data = LineChartData(dataSet: set1)
+        
         
         self.lineChartView.data = data
         
