@@ -103,8 +103,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         view.addSubview(button2)
         view.addSubview(button3)
-        self.lineChartView.leftAxis.axisMinimum = 0
-        self.lineChartView.rightAxis.axisMinimum = 0
+        //self.lineChartView.leftAxis.axisMinimum = 0
+        //self.lineChartView.rightAxis.axisMinimum = 0
         
         initChart()
    
@@ -264,7 +264,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
  */
     
     @objc func initChart(){
-        for i in 0..<numVal {
+        /*
+         for i in 0..<numVal {
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
             
         }
@@ -274,11 +275,14 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         let data = LineChartData(dataSet: set1)
        
         self.lineChartView.data = data
-        /*
+        
+        */
+        
+        
         var testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
         for i in 0..<numVal {
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(testECGdata[0][i]))
-        }
+        }/*
         for i in 0...999{
             if(i<100){
                 valuesArr[i].y = Double(50)
@@ -311,7 +315,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
                 valuesArr[i].y = Double(0)
             }
             
-        }
+        }*/
         
         var currVal = valuesArr[0].y
         
@@ -327,7 +331,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         let data = LineChartData(dataSet: set1)
         
         self.lineChartView.data = data
-        */
+        
     }
     
     func continuousFilter(arr: Array<ChartDataEntry>) -> Array<ChartDataEntry>{
