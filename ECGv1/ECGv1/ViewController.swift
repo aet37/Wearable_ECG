@@ -109,8 +109,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         initChart()
    
         // Notification to call chart updater every time something is recived in queue
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
-        
+        //NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
+        _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -140,20 +140,24 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
     
-    
+    var currVal = 0.0
+    var testECGdata : [[Double]] = []
+    var currDataIndex = 1000
     //var globalFilterTime = 0.0
     
     // Listen for pushed() notification
     
     
     //new chart updater
-    @objc func updateChartValues(notification: NSNotification){
-        if(EKGQueue.isEmpty() == false){
-            var newVal = Double(EKGQueue.pop())
+   // @objc func updateChartValues(notification: NSNotification){
+    @objc func updateChartValues(){
+       // if(EKGQueue.isEmpty() == false){
+          //  var newVal = Double(EKGQueue.pop())
                         
             // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
            // newVal = continuousFilter(arr: newVal)
-            
+            var newVal = testECGdata[0][currDataIndex]
+        
             valuesArr.removeFirst()
             valuesArr.append(ChartDataEntry(x: Double(999), y: Double(newVal)))
             
@@ -181,13 +185,16 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             }
             
             //filtering
+            valuesArr[999].y = (currVal * 0.2) + (0.8 * valuesArr[999].y)
+            currDataIndex += 1
+            /*
             var currVal = valuesArr[0].y
             for i in 0...999{
                 currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
                 valuesArr[i].y = currVal
-            }
+            }*/
             
-        }
+        //}
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         set1.drawValuesEnabled = false
@@ -279,10 +286,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         */
         
         
-        var testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
+        testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
         for i in 0..<numVal {
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(testECGdata[0][i]))
-        }/*
+        }
+        /*
         for i in 0...999{
             if(i<100){
                 valuesArr[i].y = Double(50)
@@ -317,9 +325,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             
         }*/
         
-        var currVal = valuesArr[0].y
-        
-        
+        currVal = valuesArr[0].y
         for i in 0...999{
             currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
             valuesArr[i].y = currVal
