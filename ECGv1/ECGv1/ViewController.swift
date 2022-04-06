@@ -103,8 +103,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         view.addSubview(button2)
         view.addSubview(button3)
-        self.lineChartView.leftAxis.axisMinimum = 0
-        self.lineChartView.rightAxis.axisMinimum = 0
+//        self.lineChartView.leftAxis.axisMinimum = 0
+//        self.lineChartView.rightAxis.axisMinimum = 0
         
         initChart()
    
@@ -149,6 +149,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     var HR: Double = 1.1
     var leads = false
     var polydata: [Double] = []
+    var currVal = 0.0
     
     
     //var globalFilterTime = 0.0
@@ -252,11 +253,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             }
             
             //filtering
-            var currVal = valuesArr[0].y
-            for i in 0...999{
-                currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
-                valuesArr[i].y = currVal
-            }
+        valuesArr[999].y = (currVal * 0.2) + (0.8 * valuesArr[999].y)
+        
             
         //}
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
@@ -345,6 +343,12 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         for i in 0...testECGdata[0].count - 1 {
             testECGdata[0][i] = (testECGdata[0][i] - mean)
             valuesArr[i] = ChartDataEntry(x: Double(i), y: testECGdata[0][i])
+        }
+        
+        currVal = valuesArr[0].y
+        for i in 0...999{
+            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+            valuesArr[i].y = currVal
         }
         
         (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
