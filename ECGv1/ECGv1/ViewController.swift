@@ -166,7 +166,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         if (currentECGdata != incrementECGdata) {
             testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data\(incrementECGdata).csv");
             
-            if (incrementECGdata == 2) {
+            if (incrementECGdata == 3) {
                 let mean = calculateMean(array: testECGdata[0])
                 for i in 0...testECGdata[0].count - 1 {
                     testECGdata[0][i] = -(testECGdata[0][i] - mean)
