@@ -67,18 +67,22 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     //heart rate value
     public let button2: UIButton = {
        let button2 = UIButton()
-        button2.backgroundColor = .gray
+        button2.backgroundColor = .systemBlue
         button2.setTitle("72", for: .normal)
-        button2.setTitleColor(.black, for: .normal)
+        button2.setTitleColor(.white, for: .normal)
+        button2.layer.cornerRadius = 20
+        button2.layer.masksToBounds = true
        return button2
     }()
     
     //Lead Status value
     public let button3: UIButton = {
         let button3 = UIButton()
-        button3.backgroundColor = .gray
+        button3.backgroundColor = .systemBlue
         button3.setTitle("OK", for: .normal)
-        button3.setTitleColor(.black, for: .normal)
+        button3.setTitleColor(.white, for: .normal)
+        button3.layer.cornerRadius = 20
+        button3.layer.masksToBounds = true
         return button3
     }()
     
@@ -98,9 +102,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         
         view.addSubview(button2)
-//        var str = heartRate.pointee
-//        button2.setTitle(String(str), for: .normal)
         view.addSubview(button3)
+        self.lineChartView.leftAxis.axisMinimum = 0
+        self.lineChartView.rightAxis.axisMinimum = 0
         
         initChart()
    
@@ -108,6 +112,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
         
         _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
+        
     }
     
     /*-------------------------------Button Layout-------------------------------*/
@@ -115,13 +120,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         super.viewDidLayoutSubviews()
         button2.frame = CGRect(
             x: 57,
-            y: 225,
+            y: 185,
             width: 60,
             height: 55
         )
         button3.frame = CGRect(
             x: view.frame.size.width - 117,
-            y: 225,
+            y: 185,
             width: 60,
             height: 55
         )
@@ -180,7 +185,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             
             (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
             
-            button2.setTitle(String(HR), for: .normal)
+           // button2.setTitle(String(HR), for: .normal)
             
             if (leads == false) {
                 button3.setTitle("Ok", for: .normal)
@@ -239,12 +244,19 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 //        }
         
             //calls filter
-//            valuesArr = continuousFilter(arr: valuesArr)
+            //valuesArr = continuousFilter(arr: valuesArr)
             
-//            for i in 0..<numVal {
-//                valuesArr[i].x = Double(i)
-//                valuesArr[i].y = Double(valuesArr[i].y)
-//            }
+            for i in 0..<numVal {
+                valuesArr[i].x = Double(i)
+                valuesArr[i].y = Double(valuesArr[i].y)
+            }
+            
+            //filtering
+            var currVal = valuesArr[0].y
+            for i in 0...999{
+                currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+                valuesArr[i].y = currVal
+            }
             
         //}
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
@@ -264,7 +276,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
            // newVal = continuousFilter(arr: newVal)
             
             valuesArr.removeFirst()
-            valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
+            valuesArr.append(ChartDataEntry(x: Double(999), y: Double(newVal)))
             
             valuesArr = continuousFilter(arr: valuesArr)
             
@@ -355,7 +367,60 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         
         self.lineChartView.data = data
+        /*
+        var testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
+        for i in 0..<numVal {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(testECGdata[0][i]))
+        }
+        for i in 0...999{
+            if(i<100){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=100 && i<200){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=200 && i<300){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=300 && i<400){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=400 && i<500){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=500 && i<600){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=600 && i<700){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=700 && i<800){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=800 && i<900){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=900 && i<1000){
+                valuesArr[i].y = Double(0)
+            }
+            
+        }
         
+        var currVal = valuesArr[0].y
+        
+        
+        for i in 0...999{
+            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+            valuesArr[i].y = currVal
+        }
+        
+        //valuesArr = continuousFilter(arr: valuesArr)
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        set1.drawCirclesEnabled = false
+        let data = LineChartData(dataSet: set1)
+        
+        self.lineChartView.data = data
+        */
     }
     
     func continuousFilter(arr: Array<ChartDataEntry>) -> Array<ChartDataEntry>{
