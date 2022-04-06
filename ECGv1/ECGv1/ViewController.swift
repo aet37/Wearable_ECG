@@ -165,6 +165,19 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         var testECGdata : [[Double]] = []
         if (currentECGdata != incrementECGdata) {
             testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data\(incrementECGdata).csv");
+            
+            if (incrementECGdata == 2) {
+                let mean = calculateMean(array: testECGdata[0])
+                for i in 0...testECGdata[0].count - 1 {
+                    testECGdata[0][i] = -(testECGdata[0][i] - mean)
+                }
+            } else {
+                let mean = calculateMean(array: testECGdata[0])
+                for i in 0...testECGdata[0].count - 1 {
+                    testECGdata[0][i] = (testECGdata[0][i] - mean)
+                }
+            }
+            
             (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
             
             button2.setTitle(String(HR), for: .normal)
@@ -196,15 +209,29 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         valuesArr.removeFirst()
         valuesArr.removeFirst()
         valuesArr.removeFirst()
-        valuesArr.append(ChartDataEntry(x: Double(3597), y: Double(testECGdata[0][addpoint])));
-        valuesArr.append(ChartDataEntry(x: Double(3598), y: Double(testECGdata[0][addpoint + 1])));
-        valuesArr.append(ChartDataEntry(x: Double(3599), y: Double(testECGdata[0][addpoint + 2])));
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.removeFirst()
+        valuesArr.append(ChartDataEntry(x: Double(3594), y: Double(polydata[addpoint])));
+        valuesArr.append(ChartDataEntry(x: Double(3595), y: Double(polydata[addpoint + 1])));
+        valuesArr.append(ChartDataEntry(x: Double(3596), y: Double(polydata[addpoint + 2])));
+        valuesArr.append(ChartDataEntry(x: Double(3597), y: Double(polydata[addpoint + 3])));
+        valuesArr.append(ChartDataEntry(x: Double(3598), y: Double(polydata[addpoint + 4])));
+        valuesArr.append(ChartDataEntry(x: Double(3599), y: Double(polydata[addpoint + 5])));
+        valuesArr.append(ChartDataEntry(x: Double(3596), y: Double(polydata[addpoint + 6])));
+        valuesArr.append(ChartDataEntry(x: Double(3597), y: Double(polydata[addpoint + 7])));
+        valuesArr.append(ChartDataEntry(x: Double(3598), y: Double(polydata[addpoint + 8])));
+        valuesArr.append(ChartDataEntry(x: Double(3599), y: Double(polydata[addpoint + 9])));
         
         for i in 0...3599{
             valuesArr[i].x = Double(i)
         }
         
-        addpoint += 3
+        addpoint += 10
         
 //        for i in 0...polydata.count-1 {
 //            valuesArr[i].x = Double(i)
@@ -300,10 +327,22 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 //        for i in 0..<numVal {
 //            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
 //        }
-        let testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
+        var testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
         
+        let mean = calculateMean(array: testECGdata[0])
         for i in 0...testECGdata[0].count - 1 {
+            testECGdata[0][i] = (testECGdata[0][i] - mean)
             valuesArr[i] = ChartDataEntry(x: Double(i), y: testECGdata[0][i])
+        }
+        
+        (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
+        
+        button2.setTitle(String(HR), for: .normal)
+        
+        if (leads == false) {
+            button3.setTitle("Ok", for: .normal)
+        } else {
+            button3.setTitle("Flipped", for: .normal)
         }
         
     

@@ -75,10 +75,9 @@ public func transpose(_ A: Matrix) -> Matrix {
     return C
 }
 
-/*-------------------------------Overwriting Power Operator-------------------------------*/
-//infix operator ** : MultiplicationPrecedence
-//func ** (num: Double, power: Double) -> Double{
-//    return pow(num, power);
+/*-------------------------------To Voltage Operator-------------------------------*/
+//public func (inputVal: Double) -> Double{
+//    return inputVal ;
 //}
 
 /*-------------------------------Dot Product function-------------------------------*/
@@ -230,31 +229,11 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
 //
 //    }
     
-    //FOR CHECKOFF 2 SINCE BLUETOOTH BROKE
-    //Find local maxima which corresponds to top of the QRS complex
-    var highest_values : [Double] = []
-    var highest_index : [Double] = []
-    
-    var inc = 1
-    while (inc < 3600) {
-        if (ECG_detrend[inc] >= 1100) {
-            highest_values.append(ECG_detrend[inc])
-            highest_index.append(Double(inc))
-            
-            if (inc < ECG_detrend.count - 1 - 50) {
-                inc += 50
-            } else {
-                inc = 3599
-            }
-        }
-        inc += 1
-    }
-
-    //Find local minima which corresponds to top of the QRS complex if flipped
-    let modified_detrend = -ECG_detrend;
-
-    var lowest_values : [Double] = []
-    var lowest_index : [Double] = []
+//    //Find local minima which corresponds to top of the QRS complex if flipped
+//    let modified_detrend = -ECG_detrend;
+//
+//    var lowest_values : [Double] = []
+//    var lowest_index : [Double] = []
 //    for i in 0...modified_detrend.count - 1 {
 //        let max_val = max(modified_detrend)
 //        let mean_val = calculateMean(array: modified_detrend)
@@ -265,20 +244,56 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
 //        }
 //
 //    }
-
-    let avg_highest_value = calculateMean(array: highest_values);
-    let avg_lowest_value = calculateMean(array: lowest_values);
-
-
-    if (avg_lowest_value > avg_highest_value) {
+    
+    //FOR CHECKOFF 2 SINCE BLUETOOTH BROKE
+    //check if leads flipped
+    var highest_values : [Double] = []
+    var highest_index : [Double] = []
+    
+    var modified_detrend = ECG_detrend;
+    let max_val = max(modified_detrend)
+    let min_val = min(modified_detrend)
+    let mean_val = calculateMean(array: modified_detrend)
+    
+    if ((max_val - mean_val) < (abs(min_val) - mean_val)) {
         leadsFlipped = true;
-        heartRate = 0;
-    }
-    else {
+    } else {
         leadsFlipped = false;
-//            r_index = find(highest_values);
-        heartRate = Double(highest_values.count) * 6.0;
     }
+    
+    
+    if (leadsFlipped == true) {
+        modified_detrend = -ECG_detrend
+    }
+    var inc = 1
+    while (inc < 3600) {
+        if (modified_detrend[inc] >= 150) {
+            highest_values.append(modified_detrend[inc])
+            highest_index.append(Double(inc))
+            
+            if (inc < modified_detrend.count - 1 - 50) {
+                inc += 50
+            } else {
+                inc = 3599
+            }
+        }
+        inc += 1
+    }
+    
+    heartRate = Double(highest_values.count) * 6.0;
+
+//    let avg_highest_value = calculateMean(array: highest_values);
+//    let avg_lowest_value = calculateMean(array: lowest_values);
+//
+//
+//    if (avg_lowest_value > avg_highest_value) {
+//        leadsFlipped = true;
+//        heartRate = 0;
+//    }
+//    else {
+//        leadsFlipped = false;
+//        heartRate = Double(highest_values.count) * 6.0;
+//    }
     
 //    print("r peaks count: \(highest_values.count)")
 //    print("heart rate: \(heartRate)")
