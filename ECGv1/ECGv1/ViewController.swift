@@ -139,7 +139,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     let numVal = 1000
     
     var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
-    
+    var currVal = 0.0
     
     //var globalFilterTime = 0.0
     
@@ -180,12 +180,14 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
                 valuesArr[i].y = Double(valuesArr[i].y)
             }
             
+            valuesArr[999].y = (currVal * 0.2) + (0.8 * valuesArr[999].y)
+            currVal = valuesArr[999].y
             //filtering
-            var currVal = valuesArr[0].y
-            for i in 0...999{
-                currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
-                valuesArr[i].y = currVal
-            }
+           // var currVal = valuesArr[0].y
+            //for i in 0...999{
+            //    currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+            //    valuesArr[i].y = currVal
+           // }
             
         }
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
@@ -269,9 +271,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             
         }
    
-        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
-        set1.drawCirclesEnabled = false
-        let data = LineChartData(dataSet: set1)
+        //let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        //set1.drawCirclesEnabled = false
+        //let data = LineChartData(dataSet: set1)
        
         self.lineChartView.data = data
         /*
@@ -313,9 +315,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             
         }
         
-        var currVal = valuesArr[0].y
-        
-        
+        currVal = valuesArr[0].y
         for i in 0...999{
             currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
             valuesArr[i].y = currVal
