@@ -270,12 +270,25 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
             
         }
-   
+        
+        currVal = valuesArr[0].y
+        for i in 0...999{
+            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+            valuesArr[i].y = currVal
+        }
+        
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
+        let data = LineChartData(dataSet: set1)
+        
+        self.lineChartView.data = data
         //let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         //set1.drawCirclesEnabled = false
         //let data = LineChartData(dataSet: set1)
        
-        self.lineChartView.data = data
+        //self.lineChartView.data = data
         /*
         var testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
         for i in 0..<numVal {
