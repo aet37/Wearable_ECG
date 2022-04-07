@@ -186,7 +186,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             
             (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
             
-           // button2.setTitle(String(HR), for: .normal)
+           button2.setTitle(String(HR), for: .normal)
             
             if (leads == false) {
                 button3.setTitle("Ok", for: .normal)
