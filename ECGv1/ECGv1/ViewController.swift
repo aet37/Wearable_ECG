@@ -68,7 +68,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     public let button2: UIButton = {
        let button2 = UIButton()
         button2.backgroundColor = .systemBlue
-        button2.setTitle("72", for: .normal)
+        button2.setTitle("0", for: .normal)
         button2.setTitleColor(.white, for: .normal)
         button2.layer.cornerRadius = 20
         button2.layer.masksToBounds = true
@@ -100,7 +100,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     public let dispAvg: UIButton = {
         let dispAvg = UIButton()
         dispAvg.backgroundColor = .white
-        dispAvg.setTitle("86", for: .normal)
+        dispAvg.setTitle("0", for: .normal)
         dispAvg.setTitleColor(.black, for: .normal)
         dispAvg.layer.cornerRadius = 20
         dispAvg.layer.masksToBounds = true
@@ -128,7 +128,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     public let rec1: UIButton = {
         let rec1 = UIButton()
         rec1.backgroundColor = .white
-        rec1.setTitle("86", for: .normal)
+        rec1.setTitle("0", for: .normal)
         rec1.setTitleColor(.black, for: .normal)
         rec1.layer.cornerRadius = 20
         rec1.layer.masksToBounds = true
@@ -138,7 +138,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     public let rec2: UIButton = {
         let rec2 = UIButton()
         rec2.backgroundColor = .white
-        rec2.setTitle("86", for: .normal)
+        rec2.setTitle("0", for: .normal)
         rec2.setTitleColor(.black, for: .normal)
         rec2.layer.cornerRadius = 20
         rec2.layer.masksToBounds = true
@@ -148,7 +148,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     public let rec3: UIButton = {
         let rec3 = UIButton()
         rec3.backgroundColor = .white
-        rec3.setTitle("86", for: .normal)
+        rec3.setTitle("0", for: .normal)
         rec3.setTitleColor(.black, for: .normal)
         rec3.layer.cornerRadius = 20
         rec3.layer.masksToBounds = true
@@ -158,7 +158,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     public let rec4: UIButton = {
         let rec4 = UIButton()
         rec4.backgroundColor = .white
-        rec4.setTitle("86", for: .normal)
+        rec4.setTitle("0", for: .normal)
         rec4.setTitleColor(.black, for: .normal)
         rec4.layer.cornerRadius = 20
         rec4.layer.masksToBounds = true
@@ -187,8 +187,12 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //imageView.center = view.center
         view.addSubview(button2)
         view.addSubview(button3)
-        self.lineChartView.leftAxis.axisMinimum = 0
-        self.lineChartView.rightAxis.axisMinimum = 0
+        self.lineChartView.leftAxis.axisMinimum = -2
+        self.lineChartView.rightAxis.axisMinimum = -2
+        
+        self.lineChartView.leftAxis.axisMaximum = 2.5
+        self.lineChartView.rightAxis.axisMaximum = 2.5
+
         
         scrollView.delegate = self
         pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)),
@@ -302,6 +306,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
                 page.backgroundColor = colors[x]
             }
             scrollView.addSubview(page)
+            if(x == 0){
+                page.addSubview(startSwitch)
+            }
             if(x == 1){
                 page.addSubview(dataTitl)
                 page.addSubview(dispAvg)
@@ -402,6 +409,22 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 
             //update the HR
             button2.setTitle(String(HR), for: .normal)
+            
+            //data ui updates
+            
+            //update average heartrate
+            totalHeartRate.append(HR)
+            avgHeartRate = totalHeartRate.reduce(0, +) / Double(totalHeartRate.count)
+            dispAvg.setTitle(String(format: "%.2f", avgHeartRate), for: .normal)
+            
+            //update most recent heart rates
+            recentHeartRate.removeFirst()
+            recentHeartRate.append(HR)
+            rec1.setTitle(String(recentHeartRate[3]), for: .normal)
+            rec2.setTitle(String(recentHeartRate[2]), for: .normal)
+            rec3.setTitle(String(recentHeartRate[1]), for: .normal)
+            rec4.setTitle(String(recentHeartRate[0]), for: .normal)
+        
 
             //update the Lead Status
             if (leads == false) {
@@ -430,20 +453,6 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             }
         }
         
-        //data ui updates
-        
-        //update average heartrate
-        //totalHeartRate.append("lucio HR value")
-        //avgHeartRate = totalHeartRate.reduce(0, +) / Double(totalHeartRate.count)
-        //dispAvg.setTitle(String(format: "%.2f", avgHeartRate), for: .normal)
-        
-        //update most recent heart rates
-//            recentHeartRate.removeFirst()
-//            recentHeartRate.append("lucio HR value")
-//            rec1.setTitle(String(recentHeartRate[3]), for: .normal)
-//            rec2.setTitle(String(recentHeartRate[2]), for: .normal)
-//            rec3.setTitle(String(recentHeartRate[1]), for: .normal)
-//            rec4.setTitle(String(recentHeartRate[0]), for: .normal)
         
         
             

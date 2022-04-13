@@ -256,16 +256,31 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     let mean_val = calculateMean(array: modified_detrend)
     
     //check if the leads are flipped
-    if ((max_val - mean_val) < (abs(min_val) - mean_val)) {
+    var top_count = 0
+    var bottom_count = 0
+    for i in 0...modified_detrend.count - 1 {
+        if (modified_detrend[i] > -min_val * 0.8) {
+            top_count += 1
+        } else if (modified_detrend[i] < min_val * 0.8) {
+            bottom_count += 1
+        }
+    }
+    
+    if (bottom_count > top_count) {
         leadsFlipped = true;
     } else {
         leadsFlipped = false;
     }
+//    if ((max_val - mean_val) < (abs(min_val) - mean_val)) {
+//        leadsFlipped = true;
+//    } else {
+//        leadsFlipped = false;
+//    }
     
     //flip the data so that you can still calculate heart rate even if the leads are flipped
-    if (leadsFlipped == true) {
-        modified_detrend = -ECG_detrend
-    }
+//    if (leadsFlipped == true) {
+//        modified_detrend = -ECG_detrend
+//    }
     
 //    var inc = 1
 //    while (inc < modified_detrend.count) {
@@ -298,7 +313,7 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     
     //calcualte heart rate
 //    heartRate = Double(highest_values.count) * 6.0;
-    heartRate = Double(count) * 6.0;
+    heartRate = Double(count) * 16.0;
     print(heartRate);
 
 //    let avg_highest_value = calculateMean(array: highest_values);
