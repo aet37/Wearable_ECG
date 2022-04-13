@@ -86,7 +86,94 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         return button3
     }()
     
-//    @IBOutlet weak var Addtest: UILabel!
+    public let dataTitl: UIButton = {
+            let dataTitl = UIButton()
+            //testbutton.backgroundColor = .systemGreen
+            dataTitl.setTitle("User Data", for: .normal)
+            dataTitl.setTitleColor(.white, for: .normal)
+            dataTitl.titleLabel!.font = (UIFont .systemFont(ofSize: 25))
+            //testbutton.layer.cornerRadius = 20
+            dataTitl.layer.masksToBounds = true
+            return dataTitl
+        }()
+        
+    public let dispAvg: UIButton = {
+        let dispAvg = UIButton()
+        dispAvg.backgroundColor = .white
+        dispAvg.setTitle("86", for: .normal)
+        dispAvg.setTitleColor(.black, for: .normal)
+        dispAvg.layer.cornerRadius = 20
+        dispAvg.layer.masksToBounds = true
+        return dispAvg
+    }()
+        
+    public let avgTitl: UIButton = {
+        let avgTitl = UIButton()
+        avgTitl.setTitle("Average Heart Rate", for: .normal)
+        avgTitl.setTitleColor(.white, for: .normal)
+        avgTitl.titleLabel!.font = (UIFont .systemFont(ofSize: 17))
+        avgTitl.layer.masksToBounds = true
+        return avgTitl
+    }()
+    
+    public let recTitl: UIButton = {
+        let recTitl = UIButton()
+        recTitl.setTitle("Most Recent Heart Rates", for: .normal)
+        recTitl.setTitleColor(.white, for: .normal)
+        recTitl.titleLabel!.font = (UIFont .systemFont(ofSize: 17))
+        recTitl.layer.masksToBounds = true
+        return recTitl
+    }()
+    
+    public let rec1: UIButton = {
+        let rec1 = UIButton()
+        rec1.backgroundColor = .white
+        rec1.setTitle("86", for: .normal)
+        rec1.setTitleColor(.black, for: .normal)
+        rec1.layer.cornerRadius = 20
+        rec1.layer.masksToBounds = true
+        return rec1
+    }()
+        
+    public let rec2: UIButton = {
+        let rec2 = UIButton()
+        rec2.backgroundColor = .white
+        rec2.setTitle("86", for: .normal)
+        rec2.setTitleColor(.black, for: .normal)
+        rec2.layer.cornerRadius = 20
+        rec2.layer.masksToBounds = true
+        return rec2
+    }()
+    
+    public let rec3: UIButton = {
+        let rec3 = UIButton()
+        rec3.backgroundColor = .white
+        rec3.setTitle("86", for: .normal)
+        rec3.setTitleColor(.black, for: .normal)
+        rec3.layer.cornerRadius = 20
+        rec3.layer.masksToBounds = true
+        return rec3
+    }()
+    
+    public let rec4: UIButton = {
+        let rec4 = UIButton()
+        rec4.backgroundColor = .white
+        rec4.setTitle("86", for: .normal)
+        rec4.setTitleColor(.black, for: .normal)
+        rec4.layer.cornerRadius = 20
+        rec4.layer.masksToBounds = true
+        return rec4
+    }()
+        
+    /*-------------------------------Data Page-------------------------------*/
+    let scrollView = UIScrollView()
+    
+    let pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.numberOfPages = 2
+        pageControl.backgroundColor = .systemBlue
+        return pageControl
+    }()
     
     /*-------------------------------Main-------------------------------*/
     override func viewDidLoad() {
@@ -98,13 +185,16 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         //view.backgroundColor = .systemGray
         //imageView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         //imageView.center = view.center
-        
-        
-        
         view.addSubview(button2)
         view.addSubview(button3)
-//        self.lineChartView.leftAxis.axisMinimum = 0
-//        self.lineChartView.rightAxis.axisMinimum = 0
+        self.lineChartView.leftAxis.axisMinimum = 0
+        self.lineChartView.rightAxis.axisMinimum = 0
+        
+        scrollView.delegate = self
+        pageControl.addTarget(self, action: #selector(pageControlDidChange(_:)),
+                              for: .valueChanged)
+        view.addSubview(scrollView)
+        view.addSubview(pageControl)
         
         initChart()
    
@@ -115,9 +205,22 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
     }
     
+    @objc func pageControlDidChange(_ sender: UIPageControl){
+        let current = sender.currentPage
+        scrollView.setContentOffset(CGPoint(x: CGFloat(current) * view.frame.size.width,
+                                            y: 0), animated: true)
+    }
+    
     /*-------------------------------Button Layout-------------------------------*/
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        pageControl.frame = CGRect(x: 10, y: view.frame.size.height-50, width: view.frame.size.width-20, height: 30)
+        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height-65)
+        
+        if scrollView.subviews.count == 2 {
+            configureScrollView()
+        }
         button2.frame = CGRect(
             x: 57,
             y: 185,
@@ -130,16 +233,95 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             width: 60,
             height: 55
         )
+        dataTitl.frame = CGRect(
+            x: view.frame.size.width / 2 - 60,
+            y: 70,
+            width: 120,
+            height: 55
+        )
+        avgTitl.frame = CGRect(
+            x: view.frame.size.width / 4 - 55,
+            y: 185,
+            width: 150,
+            height: 55
+        )
         
+        dispAvg.frame = CGRect(
+            x: view.frame.size.width - 145,
+            y: 185,
+            width: 80,
+            height: 55
+        )
+        
+        recTitl.frame = CGRect(
+            x: view.frame.size.width / 2 - 100,
+            y: 250,
+            width: 200,
+            height: 55
+        )
+        
+        rec1.frame = CGRect(
+            x: view.frame.size.width / 2 - 30,
+            y: 300,
+            width: 60,
+            height: 55
+        )
+        
+        rec2.frame = CGRect(
+            x: view.frame.size.width / 2 - 30,
+            y: 360,
+            width: 60,
+            height: 55
+        )
+        
+        rec3.frame = CGRect(
+            x: view.frame.size.width / 2 - 30,
+            y: 420,
+            width: 60,
+            height: 55
+        )
+        
+        rec4.frame = CGRect(
+            x: view.frame.size.width / 2 - 30,
+            y: 480,
+            width: 60,
+            height: 55
+        )
     }
     
+    func configureScrollView() {
+        scrollView.contentSize = CGSize(width: view.frame.size.width*2, height: scrollView.frame.size.height)
+        scrollView.isPagingEnabled = true
+        let colors: [UIColor] = [.systemRed, .systemBlue]
+        for x in 0..<2{
+            let page = UIView(frame: CGRect(x: CGFloat(x) * view.frame.size.width,
+                                            y: 0,
+                                            width: view.frame.size.width,
+                                            height: scrollView.frame.size.height))
+            if(x == 1){
+                page.backgroundColor = colors[x]
+            }
+            scrollView.addSubview(page)
+            if(x == 1){
+                page.addSubview(dataTitl)
+                page.addSubview(dispAvg)
+                page.addSubview(avgTitl)
+                page.addSubview(recTitl)
+                page.addSubview(rec1)
+                page.addSubview(rec2)
+                page.addSubview(rec3)
+                page.addSubview(rec4)
+            }
+        }
+        
+        
+    }
     
     
     
     /*-------------------------------Chart Values-------------------------------*/
     
     let numVal = 1000
-    
     var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
     
     //Global Variables for the EKG Algorithm and Graph
@@ -159,6 +341,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     var testIncBool = true;
     var testInc = 1000;
     
+    //new ui
+    var avgHeartRate = 0.0
+    var totalHeartRate = [0.0]
+    var recentHeartRate = [0.0, 0.0, 0.0, 0.0] // keep at 4
+
     
     //var globalFilterTime = 0.0
     
@@ -242,7 +429,22 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
                 overwriteCounter += 50;
             }
         }
-
+        
+        //data ui updates
+        
+        //update average heartrate
+        //totalHeartRate.append("lucio HR value")
+        //avgHeartRate = totalHeartRate.reduce(0, +) / Double(totalHeartRate.count)
+        //dispAvg.setTitle(String(format: "%.2f", avgHeartRate), for: .normal)
+        
+        //update most recent heart rates
+//            recentHeartRate.removeFirst()
+//            recentHeartRate.append("lucio HR value")
+//            rec1.setTitle(String(recentHeartRate[3]), for: .normal)
+//            rec2.setTitle(String(recentHeartRate[2]), for: .normal)
+//            rec3.setTitle(String(recentHeartRate[1]), for: .normal)
+//            rec4.setTitle(String(recentHeartRate[0]), for: .normal)
+        
         
             
             
@@ -472,4 +674,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
     }
     
+}
+
+
+extension ViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x) / Float(scrollView.frame.size.width)))
+    }
 }
