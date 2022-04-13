@@ -262,6 +262,69 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
         }
         
+        currVal = valuesArr[0].y
+        for i in 0...999{
+            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+            valuesArr[i].y = currVal
+        }
+        
+        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        set1.drawCirclesEnabled = false
+        set1.drawValuesEnabled = false
+        set1.lineWidth = 3.0
+        let data = LineChartData(dataSet: set1)
+        
+        self.lineChartView.data = data
+        //let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
+        //set1.drawCirclesEnabled = false
+        //let data = LineChartData(dataSet: set1)
+       
+        //self.lineChartView.data = data
+        /*
+        var testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
+        for i in 0..<numVal {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(testECGdata[0][i]))
+        }
+        for i in 0...999{
+            if(i<100){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=100 && i<200){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=200 && i<300){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=300 && i<400){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=400 && i<500){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=500 && i<600){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=600 && i<700){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=700 && i<800){
+                valuesArr[i].y = Double(0)
+            }
+            if(i>=800 && i<900){
+                valuesArr[i].y = Double(50)
+            }
+            if(i>=900 && i<1000){
+                valuesArr[i].y = Double(0)
+            }
+            
+        }
+        
+        currVal = valuesArr[0].y
+        for i in 0...999{
+            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
+            valuesArr[i].y = currVal
+        }
+        
     
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
