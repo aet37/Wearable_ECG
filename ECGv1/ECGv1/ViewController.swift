@@ -167,10 +167,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     @objc func updateChartValues(){
         if(EKGQueue.isEmpty() == false) {
             newValues.append(Double(EKGQueue.pop()))
-            overwriteSignal += 1;
-            if(newValues.count == 1000) {
-                firstTime = false;
+            if (firstTime == false) {
+                overwriteSignal += 1;
             }
+        }
+        
+        if(newValues.count == 1000) {
+            firstTime = false;
         }
         
         //importing test data
@@ -258,6 +261,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
 
     @objc func initChart(){
         
+        firstTime = true;
+        
         for i in 0..<numVal {
             valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
         }
@@ -275,6 +280,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         let data = LineChartData(dataSet: set1)
         
         self.lineChartView.data = data
+    }
+        
         //let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         //set1.drawCirclesEnabled = false
         //let data = LineChartData(dataSet: set1)
@@ -360,7 +367,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         return arr
     }
-    
+    */
     /*-------------------------------Bluetooth-------------------------------*/
     
     // Start Scanning for BT devices
