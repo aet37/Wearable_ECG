@@ -202,11 +202,11 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     let t = ECG_data[0].count;
 
     //fitting the data and detrending it
-//    let pol_order = 9;
+//    let pol_order = 7;
 //    let coeffs = polynomialFit(samples: t, values: ECG_data, order: pol_order);
 //
 //    var f_y: [Double] = [];
-//    for i in 0...t-1 {
+//    for i in 0...1000-1 {
 //        let newVal = predict(x: ECG_data[0][i], coefficients: coeffs);
 //
 //        f_y.append(newVal);
@@ -255,32 +255,51 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     let min_val = min(modified_detrend)
     let mean_val = calculateMean(array: modified_detrend)
     
+    //check if the leads are flipped
     if ((max_val - mean_val) < (abs(min_val) - mean_val)) {
         leadsFlipped = true;
     } else {
         leadsFlipped = false;
     }
     
-    
+    //flip the data so that you can still calculate heart rate even if the leads are flipped
     if (leadsFlipped == true) {
         modified_detrend = -ECG_detrend
     }
+    
+//    var inc = 1
+//    while (inc < modified_detrend.count) {
+//        if (modified_detrend[inc] >= (max_val * 0.8)) {
+//            highest_values.append(modified_detrend[inc])
+//            highest_index.append(Double(inc))
+//
+//            if (inc < modified_detrend.count - 1 - 20) {
+//                inc += 20
+//            } else {
+//                inc = 999
+//            }
+//        }
+//        inc += 1
+//    }
+    
     var inc = 1
-    while (inc < 3600) {
-        if (modified_detrend[inc] >= 150) {
-            highest_values.append(modified_detrend[inc])
-            highest_index.append(Double(inc))
+    var count = 0
+    var zeroNeighborhood = false;
+    while (inc < modified_detrend.count) {
+        if (modified_detrend[inc] >= (max_val * 0.8) && zeroNeighborhood == false) {
+            zeroNeighborhood = true;
+            count += 1;
             
-            if (inc < modified_detrend.count - 1 - 50) {
-                inc += 50
-            } else {
-                inc = 3599
-            }
+        } else if (modified_detrend[inc] < (max_val * 0.8)){
+            zeroNeighborhood = false;
         }
         inc += 1
     }
     
-    heartRate = Double(highest_values.count) * 6.0;
+    //calcualte heart rate
+//    heartRate = Double(highest_values.count) * 6.0;
+    heartRate = Double(count) * 6.0;
+    print(heartRate);
 
 //    let avg_highest_value = calculateMean(array: highest_values);
 //    let avg_lowest_value = calculateMean(array: lowest_values);

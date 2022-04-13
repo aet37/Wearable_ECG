@@ -109,9 +109,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         initChart()
    
         // Notification to call chart updater every time something is recived in queue
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateChartValues), name: Notification.Name("push"), object: nil)
         
-        _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
+//        _ = Timer.scheduledTimer(timeInterval: 0.01, target:self, selector: #selector(self.updateChartValues), userInfo: nil, repeats: true)
         
     }
     
@@ -138,125 +138,115 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     /*-------------------------------Chart Values-------------------------------*/
     
-    let numVal = 3600
+    let numVal = 1000
     
-    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 3600)
+    var valuesArr = Array<ChartDataEntry>(repeating: ChartDataEntry(x: Double(0), y: Double(0)), count: 1000)
     
-    //used to cycle through the test data
-    var incrementECGdata = 2;
-    var currentECGdata = 1;
+    //Global Variables for the EKG Algorithm and Graph
     var addpoint = 0
     var HR: Double = 1.1
     var leads = false
     var polydata: [Double] = []
     var currVal = 0.0
+    var arr = [[Int]](repeating: [Int](repeating: 0, count: 5), count: 5)
+    var ECGdata = [[Double]](repeating: [Double](repeating: 0, count: 1000), count: 1);
+    
+    var firstTime = true
+    var newValues: [Double] = [];
+    var overwriteSignal: Double = 0;
+    var overwriteCounter: Int = 50;
+    
+    var testIncBool = true;
+    var testInc = 1000;
     
     
     //var globalFilterTime = 0.0
     
     // Listen for pushed() notification
-    
-    
-    //new chart updater
-   // @objc func updateChartValues(notification: NSNotification){
+    // @objc func updateChartValues(notification: NSNotification){
     @objc func updateChartValues(){
-       // if(EKGQueue.isEmpty() == false){
-       // var newVal = Double(EKGQueue.pop())
-                    
-        // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
-       // newVal = continuousFilter(arr: newVal)
-        
-       // valuesArr.removeFirst()
-        //valuesArr.append(ChartDataEntry(x: Double(1199), y: Double(newVal)))
-        var testECGdata : [[Double]] = []
-        if (currentECGdata != incrementECGdata) {
-            testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data\(incrementECGdata).csv");
-            
-            if (incrementECGdata == 3) {
-                let mean = calculateMean(array: testECGdata[0])
-                for i in 0...testECGdata[0].count - 1 {
-                    testECGdata[0][i] = -(testECGdata[0][i] - mean)
-                }
-            } else {
-                let mean = calculateMean(array: testECGdata[0])
-                for i in 0...testECGdata[0].count - 1 {
-                    testECGdata[0][i] = (testECGdata[0][i] - mean)
-                }
+        if(EKGQueue.isEmpty() == false) {
+            newValues.append(Double(EKGQueue.pop()))
+            overwriteSignal += 1;
+            if(newValues.count == 1000) {
+                firstTime = false;
             }
-            
-            (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
-            
-           button2.setTitle(String(HR), for: .normal)
-            
+        }
+        
+        //importing test data
+//        var testECGdata : [[Double]] = []
+//        testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/ds1.csv");
+//
+//        for i in testInc - 1000...testInc - 1 {
+//            if (testInc == 2000) {
+//                ECGdata[0][i - 1000] = (testECGdata[i][0])
+//            } else {
+//                ECGdata[0][i] = (testECGdata[i][0])
+//            }
+//        }
+//        if (testIncBool == true) {
+//            testInc = 2000
+//            testIncBool = false
+//        } else {
+//            testInc = 1000
+//            testIncBool = true
+//        }
+//        (HR, leads, polydata) = AlgHRandLeads(ECG_data: ECGdata);
+        
+        
+        //NEWVAL is added to array of 1000
+        //once arrays length is 1000 in if statement
+        //execute stuff below
+        
+        //if newValues gets 1000 new values from the EKG Queue
+        if (newValues.count == 1000) {
+
+            //bound the data around 0 and scaled between -5 and 5
+            let mean = calculateMean(array: newValues)
+            for i in 0...1000 - 1 {
+                ECGdata[0][i] = 5*((newValues[i] - mean)/(pow(2,10) - 1))
+            }
+
+            //place data into ECG algoritm for HR and Lead Status
+            (HR, leads, polydata) = AlgHRandLeads(ECG_data: ECGdata);
+
+            //update the HR
+            button2.setTitle(String(HR), for: .normal)
+
+            //update the Lead Status
             if (leads == false) {
                 button3.setTitle("Ok", for: .normal)
             } else {
                 button3.setTitle("Flipped", for: .normal)
             }
-        } else {
-            currentECGdata = incrementECGdata
-        }
-        
-//            let coeffs = polynomialFit(samples: testECGdata[0].count, values: testECGdata, order: 9);
-//            print(coeffs);
-        
-        
-        if (incrementECGdata == 10 && addpoint >= 3599) {
-            incrementECGdata = 1;
-        } else if (addpoint >= 3599) {
-            incrementECGdata += 1;
-        }
-        
-        if(addpoint >= 3600) {
-            addpoint = 0;
-        }
-        
-        
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.removeFirst()
-        valuesArr.append(ChartDataEntry(x: Double(3594), y: Double(polydata[addpoint])));
-        valuesArr.append(ChartDataEntry(x: Double(3595), y: Double(polydata[addpoint + 1])));
-        valuesArr.append(ChartDataEntry(x: Double(3596), y: Double(polydata[addpoint + 2])));
-        valuesArr.append(ChartDataEntry(x: Double(3597), y: Double(polydata[addpoint + 3])));
-        valuesArr.append(ChartDataEntry(x: Double(3598), y: Double(polydata[addpoint + 4])));
-        valuesArr.append(ChartDataEntry(x: Double(3599), y: Double(polydata[addpoint + 5])));
-        valuesArr.append(ChartDataEntry(x: Double(3596), y: Double(polydata[addpoint + 6])));
-        valuesArr.append(ChartDataEntry(x: Double(3597), y: Double(polydata[addpoint + 7])));
-        valuesArr.append(ChartDataEntry(x: Double(3598), y: Double(polydata[addpoint + 8])));
-        valuesArr.append(ChartDataEntry(x: Double(3599), y: Double(polydata[addpoint + 9])));
-        
-        for i in 0...3599{
-            valuesArr[i].x = Double(i)
-        }
-        
-        addpoint += 10
-        
-//        for i in 0...polydata.count-1 {
-//            valuesArr[i].x = Double(i)
-//            valuesArr[i].y = Double(polydata[i])
-//        }
-        
-            //calls filter
-            //valuesArr = continuousFilter(arr: valuesArr)
             
-            for i in 0..<numVal {
+            //resetting newValues array
+            newValues = [];
+        }
+
+        //when 50 new values are added overwrite the next set of 50
+        if (overwriteSignal == 50 && !firstTime) {
+            overwriteSignal = 0;
+
+            for i in overwriteCounter - 50...overwriteCounter-1 {
                 valuesArr[i].x = Double(i)
-                valuesArr[i].y = Double(valuesArr[i].y)
+                valuesArr[i].y = Double(polydata[i])
             }
+
+            if (overwriteCounter == 1000) {
+                overwriteCounter = 50;
+            } else {
+                overwriteCounter += 50;
+            }
+        }
+
+        
+            
             
             //filtering
-        valuesArr[999].y = (currVal * 0.2) + (0.8 * valuesArr[999].y)
+//        valuesArr[999].y = (currVal * 0.2) + (0.8 * valuesArr[999].y)
         
             
-        //}
         let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
         set1.drawCirclesEnabled = false
         set1.drawValuesEnabled = false
@@ -265,100 +255,11 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         self.lineChartView.data = data
     }
-    /*
-    @objc func updateChartValues(arr: Array<ChartDataEntry>){
-        if(EKGQueue.isEmpty() == false){
-            var newVal = Double(EKGQueue.pop())
-                        
-            // newVal = continuousFilter(newVal: newVal, oldVal: valuesArr[0])
-           // newVal = continuousFilter(arr: newVal)
-            
-            valuesArr.removeFirst()
-            valuesArr.append(ChartDataEntry(x: Double(999), y: Double(newVal)))
-            
-            valuesArr = continuousFilter(arr: valuesArr)
-            
-            //valuesArr = arr
-            for i in 0..<numVal {
-                valuesArr[i].x = Double(i)
-                valuesArr[i].y = Double(valuesArr[i].y)
-            }
-            
-            
-            
-        }
-        for i in 0...999{
-            if(i<100){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=100 && i<200){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=200 && i<300){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=300 && i<400){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=400 && i<500){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=500 && i<600){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=600 && i<700){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=700 && i<800){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=800 && i<900){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=900 && i<1000){
-                valuesArr[i].y = Double(0)
-            }
-            
-        }
-        
-        valuesArr = continuousFilter(arr: valuesArr)
-        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
-        set1.drawCirclesEnabled = false
-        set1.drawValuesEnabled = false
-        set1.lineWidth = 3.0
-        let data = LineChartData(dataSet: set1)
-        
-        self.lineChartView.data = data
-    }
- */
-    
+
     @objc func initChart(){
         
-//        for i in 0..<numVal {
-//            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
-//        }
-        var testECGdata = getCSVData(dataFile: "/Users/lsantella/Documents/GitHub/ECGv1/ECGv1/data1.csv");
-        
-        let mean = calculateMean(array: testECGdata[0])
-        for i in 0...testECGdata[0].count - 1 {
-            testECGdata[0][i] = (testECGdata[0][i] - mean)
-            valuesArr[i] = ChartDataEntry(x: Double(i), y: testECGdata[0][i])
-        }
-        
-        currVal = valuesArr[0].y
-        for i in 0...999{
-            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
-            valuesArr[i].y = currVal
-        }
-        
-        (HR, leads, polydata) = AlgHRandLeads(ECG_data: testECGdata);
-        
-        button2.setTitle(String(HR), for: .normal)
-        
-        if (leads == false) {
-            button3.setTitle("Ok", for: .normal)
-        } else {
-            button3.setTitle("Flipped", for: .normal)
+        for i in 0..<numVal {
+            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(0))
         }
         
     
@@ -371,60 +272,6 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         
         
         self.lineChartView.data = data
-        /*
-        var testECGdata = getCSVData(dataFile: "/Users/bobbyrouse/Downloads/Wearable_ECG/ECGv1/ECGv1/data1.csv");
-        for i in 0..<numVal {
-            valuesArr[i] = ChartDataEntry(x: Double(i), y: Double(testECGdata[0][i]))
-        }
-        for i in 0...999{
-            if(i<100){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=100 && i<200){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=200 && i<300){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=300 && i<400){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=400 && i<500){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=500 && i<600){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=600 && i<700){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=700 && i<800){
-                valuesArr[i].y = Double(0)
-            }
-            if(i>=800 && i<900){
-                valuesArr[i].y = Double(50)
-            }
-            if(i>=900 && i<1000){
-                valuesArr[i].y = Double(0)
-            }
-            
-        }
-        
-        var currVal = valuesArr[0].y
-        
-        
-        for i in 0...999{
-            currVal = (currVal * 0.2) + (0.8 * valuesArr[i].y)
-            valuesArr[i].y = currVal
-        }
-        
-        //valuesArr = continuousFilter(arr: valuesArr)
-        let set1 = LineChartDataSet(entries: valuesArr, label: "EKG")
-        set1.drawCirclesEnabled = false
-        let data = LineChartData(dataSet: set1)
-        
-        self.lineChartView.data = data
-        */
     }
     
     func continuousFilter(arr: Array<ChartDataEntry>) -> Array<ChartDataEntry>{
