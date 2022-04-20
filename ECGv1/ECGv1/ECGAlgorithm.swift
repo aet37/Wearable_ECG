@@ -256,26 +256,16 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
     let mean_val = calculateMean(array: modified_detrend)
     
     //check if the leads are flipped
-    var top_count = 0
-    var bottom_count = 0
+    var integral = 0
     for i in 0...modified_detrend.count - 1 {
-        if (modified_detrend[i] > -min_val * 0.8) {
-            top_count += 1
-        } else if (modified_detrend[i] < min_val * 0.8) {
-            bottom_count += 1
-        }
+        integral += modified_detrend[i];
     }
     
-    if (bottom_count > top_count) {
+    if (integral > mean_val) {
         leadsFlipped = true;
     } else {
         leadsFlipped = false;
     }
-//    if ((max_val - mean_val) < (abs(min_val) - mean_val)) {
-//        leadsFlipped = true;
-//    } else {
-//        leadsFlipped = false;
-//    }
     
     //flip the data so that you can still calculate heart rate even if the leads are flipped
 //    if (leadsFlipped == true) {
