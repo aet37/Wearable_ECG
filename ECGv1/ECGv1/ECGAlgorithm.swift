@@ -261,7 +261,7 @@ func AlgHRandLeads(ECG_data: [[Double]]) -> (Double, Bool, [Double]) {
         integral += modified_detrend[i];
     }
     
-    if (integral > mean_val) {
+    if (integral < mean_val) {
         leadsFlipped = true;
     } else {
         leadsFlipped = false;
